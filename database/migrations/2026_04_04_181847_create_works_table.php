@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('keyword_3')->nullable();
             $table->string('keyword_4')->nullable();
             $table->string('keyword_5')->nullable();
+            $table->json('attachments')->nullable();
             $table->timestamps();
         });
     }

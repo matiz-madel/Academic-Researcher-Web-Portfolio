@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Works\Schemas;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\FileUpload;
 use Filament\Schemas\Schema;
 use Filament\Forms\Components\Select;
 use App\Enums\WorkType;
@@ -44,6 +45,14 @@ class WorkForm
                     ->label(__('admin.fields.keyword_4')),
                 TextInput::make('keyword_5')
                     ->label(__('admin.fields.keyword_5')),
+                FileUpload::make('attachments')
+                    ->label(__('admin.fields.attachments'))
+                    ->multiple()
+                    ->directory('works-attachments')
+                    ->acceptedFileTypes(['application/pdf', 'image/jpeg', 'image/png', 'image/webp', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'])
+                    ->maxSize(1024000) // 1GB
+                    ->downloadable()
+                    ->reorderable(),
             ]);
     }
 }

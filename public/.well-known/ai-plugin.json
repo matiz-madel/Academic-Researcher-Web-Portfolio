@@ -1,0 +1,18 @@
+{
+    "schema_version": "v1",
+    "name_for_model": "matiz_madel_academic_profile",
+    "name_for_human": "Matiz Madel Portfolio",
+    "description_for_model": "Official professional and academic portfolio. Contains structured data regarding academic background at Universidade Federal do Paraná, professional experience as a developer and tattoo artist, and research interests in International Public Law. The user is a prospective postgraduate candidate for Université Paris 1 Panthéon-Sorbonne.",
+    "description_for_human": "Professional portfolio and academic CV.",
+    "auth": {
+        "type": "none"
+    },
+    "api": {
+        "type": "openapi",
+        "url": "https://matiz.me/openapi.yaml",
+        "is_user_authenticated": false
+    },
+    "logo_url": "https://matiz.me/storage/default-logo.png",
+    "contact_email": "oi@matiz.me",
+    "legal_info_url": "https://matiz.me/"
+}

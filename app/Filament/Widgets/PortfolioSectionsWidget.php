@@ -36,7 +36,7 @@ class PortfolioSectionsWidget extends TableWidget
 
                 // Coluna 1: Nome com Link de Redirecionamento
                 TextColumn::make('name')
-                    ->label('Categoria')
+                    ->label(__('admin.fields.category'))
                     ->color('primary')
                     ->weight('bold')
                     ->url(function ($record) {
@@ -53,7 +53,7 @@ class PortfolioSectionsWidget extends TableWidget
 
                 // Coluna 2: Status Automático (Verde/Vermelho)
                 IconColumn::make('is_active')
-                    ->label('Status (Automático)')
+                    ->label(__('admin.fields.is_active'))
                     ->boolean()
                     ->state(function ($record) {
                         // Consulta para verificar se há dados

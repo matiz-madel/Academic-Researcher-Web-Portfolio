@@ -21,7 +21,7 @@ class ExternalLinkForm
                     ->url()
                     ->required(),
                 ColorPicker::make('color')
-                    ->label('Cor de Fundo do Botão')
+                    ->label(__('admin.fields.color'))
                     ->default('#f1f5f9')
                     ->required(),
                 TextInput::make('description')

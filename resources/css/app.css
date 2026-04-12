@@ -11,3 +11,18 @@
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
+
+@layer utilities {
+    /* 1. Mask for perfect circular anti-aliasing */
+    .mask-radial-gradient {
+        -webkit-mask-image: -webkit-radial-gradient(white, black);
+        mask-image: radial-gradient(white, black);
+    }
+}
+
+@layer components {
+    /* 2. Dynamic Badge using CSS Variables passed from Blade */
+    .dynamic-badge {
+        background-color: color-mix(in srgb, var(--badge-color) 50%, transparent);
+    }
+}

@@ -21,7 +21,7 @@ class FundingResource extends Resource
 
     protected static ?string $model = Funding::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::CurrencyEuro;
 
     protected static ?string $recordTitleAttribute = 'title';
 

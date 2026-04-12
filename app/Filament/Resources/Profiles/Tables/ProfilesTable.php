@@ -22,6 +22,8 @@ class ProfilesTable
                     ->searchable(),
                 TextColumn::make('avatar_gif')
                     ->searchable(),
+                TextColumn::make('avatar_og')
+                    ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

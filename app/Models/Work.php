@@ -19,13 +19,14 @@ class Work extends Model
         'keyword_2',
         'keyword_3',
         'keyword_4',
-        'keyword_5'
+        'keyword_5',
     ];
 
     protected function casts(): array
     {
         return [
             'type' => WorkType::class,
+            'attachments' => 'array',
         ];
     }
 }

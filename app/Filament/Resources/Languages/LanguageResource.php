@@ -17,11 +17,14 @@ class LanguageResource extends Resource
 {
     protected static ?string $model = Language::class;
 
-    protected static ?string $navigationLabel = 'Idiomas do Sistema';
     protected static string|BackedEnum|null $navigationIcon = Heroicon::GlobeAlt;
 
     protected static ?string $recordTitleAttribute = 'language_name';
 
+    public static function getModelLabel(): string
+    {
+        return __('admin.resources.language.plural');
+    }
     public static function form(Schema $schema): Schema
     {
         return LanguageForm::configure($schema);

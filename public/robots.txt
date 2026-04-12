@@ -1,2 +1,36 @@
+# =======================================================
+# robots.txt for matiz.me
+# Welcoming Search Engines and AI Crawlers (GEO optimized)
+# =======================================================
+
 User-agent: *
-Disallow:
+Allow: /
+
+# Specifically allowing major AI and LLM crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+# Disallow admin/backend routes from being indexed
+User-agent: *
+Disallow: /admin/
+Disallow: /login
+Disallow: /livewire/
+Disallow: /vendor/
+
+# Sitemap location
+Sitemap: https://matiz.me/sitemap.xml

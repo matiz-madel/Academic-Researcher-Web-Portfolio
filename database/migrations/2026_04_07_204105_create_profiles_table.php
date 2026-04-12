@@ -16,14 +16,17 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->json('subtitle')->nullable();
+            $table->json('subtitle_variations')->nullable();
             $table->json('bio')->nullable();
             $table->json('aliases')->nullable(); // Lista de AKAs
+            $table->string('email')->nullable();
+            $table->string('phone')->nullable();
+            $table->boolean('is_whatsapp')->default(true);
+            $table->json('default_message')->nullable();
             $table->string('avatar_jpeg')->nullable();
             $table->string('avatar_gif')->nullable();
-            $table->string('email')->nullable()->after('aliases');
-            $table->string('phone')->nullable()->after('email');
-            $table->boolean('is_whatsapp')->default(true)->after('phone');
-            $table->json('default_message')->nullable();
+            $table->string('avatar_og')->nullable();
+            $table->string('resume_pdf')->nullable();
             $table->timestamps();
         });
     }

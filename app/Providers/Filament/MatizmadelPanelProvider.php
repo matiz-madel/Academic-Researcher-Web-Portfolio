@@ -12,8 +12,6 @@ use Filament\Panel;
 use Filament\PanelProvider;
 use LaraZeus\SpatieTranslatable;
 use Filament\Support\Colors\Color;
-use Filament\Widgets\AccountWidget;
-use Filament\Widgets\FilamentInfoWidget;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
@@ -25,7 +23,7 @@ class MatizmadelPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
-        $locales = ['fr'];
+        $locales = [];
         if (\Illuminate\Support\Facades\Schema::hasTable('languages')) {
             $locales = \App\Models\Language::where('is_active', true)->pluck('code')->toArray();
         }

@@ -14,15 +14,19 @@ class PortfolioSectionForm
         return $schema
             ->components([
                 Textarea::make('name')
+                    ->label(__('admin.fields.name'))
                     ->required()
                     ->columnSpanFull(),
                 TextInput::make('identifier')
+                    ->label(__('admin.fields.identifier'))
                     ->required(),
                 TextInput::make('sort')
+                    ->label(__('admin.fields.sort'))
                     ->required()
                     ->numeric()
                     ->default(0),
                 Toggle::make('is_active')
+                    ->label(__('admin.fields.is_active'))
                     ->required()
                     ->default(false),
             ]);

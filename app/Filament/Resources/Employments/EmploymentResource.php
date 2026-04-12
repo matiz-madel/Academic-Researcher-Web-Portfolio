@@ -21,7 +21,7 @@ class EmploymentResource extends Resource
 
     protected static ?string $model = Employment::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::ClipboardDocumentCheck;
 
     protected static ?string $recordTitleAttribute = 'role';
 

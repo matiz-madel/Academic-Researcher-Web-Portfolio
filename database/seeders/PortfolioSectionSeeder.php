@@ -12,37 +12,37 @@ class PortfolioSectionSeeder extends Seeder
         $sections = array(
             array(
                 'identifier' => 'works',
-                'name' => array('fr' => 'Publications', 'pt' => 'Publicações', 'en' => 'Publications', 'es' => 'Publicaciones'),
+                'name' => array(__('admin.resources.work.plural')),
                 'sort' => 1,
                 'is_active' => true
             ),
             array(
                 'identifier' => 'educations',
-                'name' => array('fr' => 'Formations', 'pt' => 'Formações Acadêmicas', 'en' => 'Educations', 'es' => 'Educación'),
+                'name' => array(__('admin.resources.education.plural')),
                 'sort' => 2,
                 'is_active' => true
             ),
             array(
                 'identifier' => 'employments',
-                'name' => array('fr' => 'Expériences professionnelles', 'pt' => 'Atuação Profissional', 'en' => 'Employments', 'es' => 'Experiencia Profesional'),
+                'name' => array(__('admin.resources.employment.plural')),
                 'sort' => 3,
                 'is_active' => true
             ),
             array(
                 'identifier' => 'activities',
-                'name' => array('fr' => 'Activités professionnelles', 'pt' => 'Atividades Profissionais', 'en' => 'Professional Activities', 'es' => 'Actividades Profesionales'),
+                'name' => array(__('admin.resources.activity.plural')),
                 'sort' => 4,
                 'is_active' => true
             ),
             array(
                 'identifier' => 'fundings',
-                'name' => array('fr' => 'Financements', 'pt' => 'Financiamentos', 'en' => 'Fundings', 'es' => 'Financiación'),
+                'name' => array(__('admin.resources.funding.plural')),
                 'sort' => 5,
                 'is_active' => true
             ),
             array(
-                'identifier' => 'links',
-                'name' => array('fr' => 'Links Externos', 'pt' => 'Links Externos', 'en' => 'Links Externos', 'es' => 'Links Externos'),
+                'identifier' => 'external_links',
+                'name' => array(__('admin.resources.external_link.plural')),
                 'sort' => 6,
                 'is_active' => true
             )

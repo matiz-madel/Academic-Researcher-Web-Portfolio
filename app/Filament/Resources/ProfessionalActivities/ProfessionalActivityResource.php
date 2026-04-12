@@ -21,7 +21,7 @@ class ProfessionalActivityResource extends Resource
 
     protected static ?string $model = ProfessionalActivity::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::PresentationChartBar;
 
     protected static ?string $recordTitleAttribute = 'title';
 

@@ -16,16 +16,17 @@ class Profile extends Model
 
     public array $translatable = [
         'subtitle',
+        'subtitle_variations',
         'default_message',
         'bio'
     ];
 
-    // Converte o JSON do banco para uma lista manipulável no PHP
     protected function casts(): array
     {
         return [
             'aliases' => 'array',
             'is_whatsapp' => 'boolean',
+            'subtitle_variations' => 'array',
         ];
     }
 
@@ -33,15 +34,6 @@ class Profile extends Model
     {
         static::saved(function ($profile) {
             Cache::forget('site_profile');
-
-            // Se houver um GIF recém-salvo, aplica o limite de 4 ciclos
-            if ($profile->avatar_gif) {
-                $path = storage_path('app/public/'. $profile->avatar_gif);
-                $manager = new ImageManager(new Driver());
-                $image = $manager->read($path);
-                $image->setLoops(4); // Configura o GIF para parar após 4 ciclos
-                $image->save();
-            }
         });
     }
 }

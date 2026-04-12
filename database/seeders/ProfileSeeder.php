@@ -22,7 +22,7 @@ class ProfileSeeder extends Seeder
                 ),
                 'bio' => array(
                 'fr' => 'Passionnée par les intersections entre le droit, la philosophie et les dynamiques de pouvoir...',
-                'pt_BR' => 'Apaixonada pelas intersecções entre o direito, a filosofia e as dinâmicas de poder...',
+                'pt' => 'Apaixonada pelas intersecções entre o direito, a filosofia e as dinâmicas de poder...',
                 'en' => 'Passionate about the intersections between law, philosophy, and power dynamics...',
                 'es' => 'Apasionada por las intersecciones entre el derecho, la filosofía y las dinámicas de poder...'
                 ),

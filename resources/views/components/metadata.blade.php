@@ -1,65 +1,52 @@
-<div>
-    {{-- Dynamic Title --}}
-    @if(isset($isPdf) && $isPdf)
-        <title>{{ $pdfTitle ?? __('portfolio.resume_title') }}</title>
-    @else
-        <title>{{ $profile ? $profile->first_name . ' ' . $profile->last_name : config('app.name') }}</title>
-    @endif
+@if($metadata?->favicon)
+    <link rel="icon" type="image/x-icon" href="{{ asset('storage/' . $metadata->favicon) }}">
+@else
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+@endif
 
-    {{-- Open Graph / Social Media --}}
-    <meta property="og:type" content="profile">
-    <meta property="og:title" content="{{ $profile ? $profile->first_name . ' ' . $profile->last_name : config('app.name') }}">
-    <meta property="og:url" content="{{ url()->current() }}">
-    <meta property="og:image" content="{{ asset('storage/' . ($profile->avatar_jpeg ?? 'default-share-image.jpg')) }}">
-    <meta property="og:description" content="{{ $profile->bio ?? __('portfolio.default_bio') }}">
+<title>{{ $public_profile?->full_name ?? config('app.name') }} @if($metadata?->title_suffix) - {{ $metadata->title_suffix }} @endif</title><meta name="description" content="{{ $metadata?->description }}">
 
-    @if($profile)
-        <meta property="profile:first_name" content="{{ $profile->first_name }}">
-        <meta property="profile:last_name" content="{{ $profile->last_name }}">
-    @endif
+<meta name="description" content="{{ $metadata?->description }}">
+<meta name="author" content="{{ $public_profile?->full_name ?? config('app.name') }}">
 
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="{{ $profile ? $profile->first_name . ' ' . $profile->last_name : config('app.name') }}">
-    <meta name="twitter:description" content="{{ $profile->bio ?? __('portfolio.default_bio') }}">
-    <meta name="twitter:image" content="{{ asset('storage/' . ($profile->avatar_jpeg ?? 'default-share-image.jpg')) }}">
+<meta property="og:image" content="{{ asset('storage/' . ($metadata?->og_image ?? 'default-share-image.jpg')) }}">
 
-    {{-- JSON-LD Schema --}}
-    @php
-        $jobTitles = [];
-        if (isset($profile)) {
-            if ($profile->subtitle) $jobTitles[] = $profile->subtitle;
-            if (!empty($profile->subtitle_variations)) {
-                $variations = $profile->subtitle_variations;
-                if (is_string($variations)) {
-                    $decoded = json_decode($variations, true);
-                    $variations = is_array($decoded) ? $decoded : [$variations];
-                }
-                $jobTitles = array_merge($jobTitles, $variations);
-            }
-        }
-    @endphp
+<meta name="keywords" content="{{ is_array($metadata?->keywords) ? implode(', ', $metadata->keywords) : $metadata?->keywords }}">
+<meta name="theme-color" content="{{ $metadata?->theme_color ?? '#ffffff' }}">
+<meta name="robots" content="{{ $metadata?->robots ?? 'index, follow' }}">
 
-    @if(isset($profile))
-        <script type="application/ld+json">
-            {
-              "@@context": "https://schema.org/",
-          "@@type": "Person",
-          "name": "{{ $profile->first_name }} {{ $profile->last_name }}",
-          "jobTitle": {!! json_encode($jobTitles) !!},
-          "url": "{{ url()->current() }}",
-          "image": "{{ asset('storage/' . $profile->avatar_jpeg) }}",
-          "knowsLanguage": [
-            { "@@type": "Language", "name": "Portuguese", "alternateName": "pt" },
-            { "@@type": "Language", "name": "French", "alternateName": "fr" },
-            { "@@type": "Language", "name": "English", "alternateName": "en" },
-            { "@@type": "Language", "name": "Spanish", "alternateName": "es" }
-          ],
-          "alumniOf": {
-            "@@type": "CollegeOrUniversity",
-            "name": "Universidade Federal do Paraná",
-            "alternateName": "UFPR"
-          }
-        }
-        </script>
-    @endif
-</div>
+@if($metadata && $metadata->resolved_fields)
+    @foreach($metadata->resolved_fields as $key => $value)
+
+        {{-- Safely skip keys handled specifically in JSON-LD --}}
+        @if(in_array($key, ['knows_about', 'orcid', 'google_scholar']))
+            @continue
+        @endif
+
+        @php
+            // Ensure arrays are converted to comma-separated strings for HTML content
+            $content = is_array($value) ? implode(', ', $value) : $value;
+        @endphp
+
+        @if(str_starts_with($key, 'og:'))
+            <meta property="{{ $key }}" content="{{ $content }}">
+        @else
+            <meta name="{{ $key }}" content="{{ $content }}">
+        @endif
+    @endforeach
+@endif
+
+{{-- JSON-LD Knowledge Graph (Using @@ to prevent Blade parsing errors) --}}
+<script type="application/ld+json">
+    {
+      "@@context": "https://schema.org/",
+  "@@type": "Person",
+  "name": "{{ $public_profile ? $public_profile->full_name : '' }}",
+  "url": "{{ url()->current() }}",
+  "sameAs": [
+    "{{ $metadata->resolved_fields['google_scholar'] ?? '' }}",
+    "https://orcid.org/{{ $metadata->resolved_fields['orcid'] ?? '' }}"
+  ],
+  "knowsAbout": {!! json_encode($metadata->resolved_fields['knows_about'] ?? []) !!}
+    }
+</script>

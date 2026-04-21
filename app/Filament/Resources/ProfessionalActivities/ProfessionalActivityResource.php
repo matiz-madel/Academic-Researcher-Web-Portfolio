@@ -62,7 +62,7 @@ class ProfessionalActivityResource extends Resource
     }
     public static function getNavigationSort():?int
     {
-        if (!\Illuminate\Support\Facades\Schema::hasTable('portfolio_sections')) return 0;
-        return \App\Models\PortfolioSection::where('identifier', 'activities')->value('sort')?? 0;
+        if (!\Illuminate\Support\Facades\Schema::hasTable('layout_sections')) return 0;
+        return \App\Models\LayoutSection::where('identifier', 'activities')->value('sort')?? 0;
     }
 }

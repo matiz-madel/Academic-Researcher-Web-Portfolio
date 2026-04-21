@@ -13,19 +13,19 @@ return new class extends Migration
     {
         Schema::create('works', function (Blueprint $table) {
             $table->id();
-            $table->string('title'); // Título da publicação
-            $table->string('type')->nullable(); // Tipo no ORCID (ex: journal-article, book-chapter, dissertation)
-            $table->text('abstract')->nullable(); // Resumo
-            $table->text('content')->nullable(); // O conteúdo completo do texto para o seu site
-            $table->date('publication_date')->nullable(); // Data de publicação
-            $table->string('doi')->nullable(); // Identificador global DOI, vital para o ORCID
-            $table->string('url')->nullable(); // Link externo, se houver
-            $table->string('keyword_1')->nullable();
-            $table->string('keyword_2')->nullable();
-            $table->string('keyword_3')->nullable();
-            $table->string('keyword_4')->nullable();
-            $table->string('keyword_5')->nullable();
-            $table->json('attachments')->nullable();
+            $table->json('title'); // Publication title
+            $table->string('type')->nullable(); // ORCID type (e.g., journal-article, book-chapter, dissertation)
+            $table->json('abstract')->nullable(); // Abstract or summary
+            $table->json('content')->nullable(); // Full content for the website
+            $table->date('publication_date')->nullable(); // Publication date
+            $table->string('doi')->nullable(); // Global DOI identifier, vital for ORCID
+            $table->text('url')->nullable(); // External link, if available
+            $table->json('keyword_1')->nullable();
+            $table->json('keyword_2')->nullable();
+            $table->json('keyword_3')->nullable();
+            $table->json('keyword_4')->nullable();
+            $table->json('keyword_5')->nullable();
+            $table->json('attachments')->nullable(); // Array of file paths
             $table->timestamps();
         });
     }

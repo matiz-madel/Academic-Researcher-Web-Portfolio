@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('languages', function (Blueprint $table) {
-            $table->id();$table->string('code')->unique(); // ex: 'fr'
-            $table->string('language_name'); // ex: 'Français'
-            $table->string('flag'); // ex: '🇫🇷'
+            $table->id();$table->string('code')->unique();
+            $table->string('language_name');
+            $table->string('flag');
             $table->integer('sort')->default(0);
             $table->boolean('is_active')->default(true);
             $table->timestamps();

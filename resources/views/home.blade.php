@@ -1,9 +1,4 @@
-@php
-    // Data fetching logic remains here temporarily
-    // ... (Your existing $profile, $works, $educations logic)
-@endphp
-
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}"
       x-data="themeHandler()"
       :class="isDark ? 'dark' : ''">
@@ -17,20 +12,20 @@
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-200 font-sans antialiased selection:bg-blue-200 dark:selection:bg-blue-900 transition-colors duration-300">
+<body
+    class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-200 font-sans antialiased selection:bg-blue-200 dark:selection:bg-blue-900 transition-colors duration-300">
 
 {{-- Top Actions (PDF & Language) --}}
 @include('components.top-actions')
 
 <div class="max-w-3xl mx-auto py-30 px-6">
-    {{-- Profile Header --}}
-    @include('components.header')
+    {{-- PublicProfile Header --}}
+    @include('components.profile')
 
-    {{-- Content Categories --}}
+    {{-- Categories Sections --}}
     @include('components.categories')
 </div>
 
-{{-- Alpine Theme Handler Logic Extracted to Script --}}
 <script>
     function themeHandler() {
         return {
@@ -43,7 +38,9 @@
                 this.checkTime();
                 setInterval(() => this.checkTime(), 60000);
                 window.addEventListener('beforeprint', () => document.documentElement.classList.remove('dark'));
-                window.addEventListener('afterprint', () => { if (this.isDark) document.documentElement.classList.add('dark'); });
+                window.addEventListener('afterprint', () => {
+                    if (this.isDark) document.documentElement.classList.add('dark');
+                });
             }
         }
     }

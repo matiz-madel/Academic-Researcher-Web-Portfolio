@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('fundings', function (Blueprint $table) {
             $table->id();
-            $table->string('funding_type')->nullable(); // Receberá o Enum FundingType
-            $table->string('title');
-            $table->string('agency');
+            $table->string('funding_type')->nullable();
+            $table->json('title');
+            $table->json('agency');
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
-            $table->string('url')->nullable();
+            $table->json('url')->nullable();
             $table->timestamps();
         });
     }

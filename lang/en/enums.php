@@ -2,25 +2,25 @@
 
 return [
     'work_type' => [
-        'journal-article' => 'Article de revue',
-        'book' => 'Livre',
-        'book-chapter' => 'Chapitre de livre',
-        'conference-paper' => 'Communication de conférence',
-        'dissertation-thesis' => 'dissertation-thesis',
-        'preprint' => 'preprint',
-        'working-paper' => 'working-paper',
-        'other' => 'other'
+        'journal-article' => 'Journal Article',
+        'book' => 'Book',
+        'book-chapter' => 'Book Chapter',
+        'conference-paper' => 'Conference Paper',
+        'dissertation-thesis' => 'Dissertation / Thesis',
+        'preprint' => 'Preprint',
+        'working-paper' => 'Working Paper',
+        'other' => 'Other',
     ],
     'activity_type' => [
-        'membership' => 'Adhésion',
-        'service' => 'Service institutionnel',
-        'invited-position' => 'Position invitée',
-        'distinction' => 'Prix',
+        'membership' => 'Membership',
+        'service' => 'Service',
+        'invited-position' => 'Invited Position',
+        'distinction' => 'Distinction / Award',
     ],
     'funding_type' => [
-        'award' => 'Récompense',
-        'contract' => 'Contrat',
-        'grant' => 'Subvention',
-        'salary-award' => 'Bourse salariale',
+        'award' => 'Award',
+        'contract' => 'Contract',
+        'grant' => 'Grant',
+        'salary-award' => 'Salary Award',
     ]
 ];

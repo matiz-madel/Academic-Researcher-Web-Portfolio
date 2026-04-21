@@ -21,7 +21,8 @@ class WorkForm
                     ->required(),
                 Select::make('type')
                     ->options(WorkType::class)
-                    ->label(__('admin.fields.type')),
+                    ->label(__('admin.fields.type'))
+                    ->required(),
                 Textarea::make('abstract')
                     ->columnSpanFull()
                     ->label(__('admin.fields.abstract')),

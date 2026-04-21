@@ -16,7 +16,8 @@ class ProfessionalActivityForm
             ->components([
                 Select::make('activity_type')
                     ->options(ActivityType::class)
-                    ->label(__('admin.fields.activity_type')),
+                    ->label(__('admin.fields.activity_type'))
+                    ->required(),
                 TextInput::make('title')
                     ->label(__('admin.fields.title'))
                     ->required(),

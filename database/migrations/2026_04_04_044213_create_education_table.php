@@ -12,13 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('education', function (Blueprint $table) {
-            $table->id();$table->string('institution');
-            $table->string('degree')->nullable();
-            $table->string('department')->nullable();
+            $table->id();
+            $table->json('institution');
+            $table->json('degree')->nullable();
+            $table->json('department')->nullable();
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
             $table->string('city')->nullable();
-            $table->string('country')->nullable();
+            $table->json('country')->nullable();
             $table->timestamps();
         });
     }

@@ -8,7 +8,7 @@ use App\Filament\Resources\Education\Pages\ListEducation;
 use App\Filament\Resources\Education\Schemas\EducationForm;
 use App\Filament\Resources\Education\Tables\EducationTable;
 use App\Models\Education;
-use App\Models\PortfolioSection;
+use App\Models\LayoutSection;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
@@ -64,7 +64,7 @@ class EducationResource extends Resource
     }
     public static function getNavigationSort():?int
     {
-        if (!\Illuminate\Support\Facades\Schema::hasTable('portfolio_sections')) return 0;
-        return \App\Models\PortfolioSection::where('identifier', 'educations')->value('sort')?? 0;
+        if (!\Illuminate\Support\Facades\Schema::hasTable('layout_sections')) return 0;
+        return \App\Models\LayoutSection::where('identifier', 'educations')->value('sort')?? 0;
     }
 }

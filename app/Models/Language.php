@@ -7,10 +7,10 @@ use Illuminate\Support\Facades\Cache;
 
 class Language extends Model
 {
-    // Permite que o seeder e o Filament preencham a tabela
+    // Allows the seeder and Filament to mass assign the table
     protected $guarded = [];
 
-    // Limpa o cache sempre que um idioma for ativado/desativado no painel
+    // Clears the cache whenever a language is activated/deactivated in the panel
     protected static function booted(): void
     {
         static::saved(function () {

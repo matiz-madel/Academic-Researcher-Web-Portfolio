@@ -16,7 +16,8 @@ class EducationForm
                     ->label(__('admin.fields.institution'))
                     ->required(),
                 TextInput::make('degree')
-                    ->label(__('admin.fields.degree')),
+                    ->label(__('admin.fields.degree'))
+                    ->required(),
                 TextInput::make('department')
                     ->label(__('admin.fields.department')),
                 DatePicker::make('start_date')

@@ -23,6 +23,6 @@
 @layer components {
     /* 2. Dynamic Badge using CSS Variables passed from Blade */
     .dynamic-badge {
-        background-color: color-mix(in srgb, var(--badge-color) 50%, transparent);
+        background-color: color-mix(in srgb, var(--badge-color, #cbd5e1) 50%, transparent);
     }
 }

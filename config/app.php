@@ -13,8 +13,25 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'Matiz Madel'),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Admin Panel Path
+    |--------------------------------------------------------------------------
+    | Define a URL base para o painel administrativo do Filament.
+    */
+    'admin_path' => env('FILAMENT_ADMIN_PATH', 'admin'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Admin Credentials (Seeder)
+    |--------------------------------------------------------------------------
+    | Credenciais padrão para a criação do usuário administrador no banco.
+    */
+    'admin_name' => env('ADMIN_NAME', 'Admin Default'),
+    'admin_email' => env('ADMIN_EMAIL', 'matiz@madel.me'),
+    'admin_password' => env('ADMIN_PASSWORD', '1mot2de3passe4'),
     /*
     |--------------------------------------------------------------------------
     | Application Environment
@@ -78,11 +95,11 @@ return [
     |
     */
 
-    'locale' => env('APP_LOCALE', 'en'),
+    'locale' => env('APP_LOCALE', 'fr'),
 
-    'fallback_locale' => env('APP_FALLBACK_LOCALE', 'en'),
+    'fallback_locale' => env('APP_FALLBACK_LOCALE', 'fr'),
 
-    'faker_locale' => env('APP_FAKER_LOCALE', 'en_US'),
+    'faker_locale' => env('APP_FAKER_LOCALE', 'fr_FR'),
 
     /*
     |--------------------------------------------------------------------------

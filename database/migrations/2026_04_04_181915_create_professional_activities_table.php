@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('professional_activities', function (Blueprint $table) {
             $table->id();
-            $table->string('activity_type')->nullable(); // Receberá o Enum ActivityType
-            $table->string('title');
-            $table->string('organization');
+            $table->string('activity_type')->nullable();
+            $table->json('title');
+            $table->json('organization');
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
-            $table->string('url')->nullable();
+            $table->json('url')->nullable();
             $table->timestamps();
         });
     }

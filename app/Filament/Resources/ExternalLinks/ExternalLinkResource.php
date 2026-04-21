@@ -8,7 +8,7 @@ use App\Filament\Resources\ExternalLinks\Pages\ListExternalLinks;
 use App\Filament\Resources\ExternalLinks\Schemas\ExternalLinkForm;
 use App\Filament\Resources\ExternalLinks\Tables\ExternalLinksTable;
 use App\Models\ExternalLink;
-use App\Models\PortfolioSection;
+use App\Models\LayoutSection;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
@@ -64,7 +64,7 @@ class ExternalLinkResource extends Resource
     }
     public static function getNavigationSort():?int
     {
-        if (!\Illuminate\Support\Facades\Schema::hasTable('portfolio_sections')) return 0;
-        return \App\Models\PortfolioSection::where('identifier', 'links')->value('sort')?? 0;
+        if (!\Illuminate\Support\Facades\Schema::hasTable('layout_sections')) return 0;
+        return \App\Models\LayoutSection::where('identifier', 'links')->value('sort')?? 0;
     }
 }

@@ -50,13 +50,13 @@ class LanguageResource extends Resource
         ];
     }
 
-    // Impede o botão "Novo" de aparecer
+    // Prevents the "New" button from appearing
     public static function canCreate(): bool
     {
         return false;
     }
 
-    // Impede a exclusão, mantendo a lista fixa
+    // Prevents deletion, keeping the list fixed
     public static function canDelete(\Illuminate\Database\Eloquent\Model $record): bool
     {
         return false;

@@ -2,5 +2,5 @@
 
 return [
     App\Providers\AppServiceProvider::class,
-    App\Providers\Filament\MatizmadelPanelProvider::class,
+    App\Providers\Filament\AdminPanelProvider::class,
 ];

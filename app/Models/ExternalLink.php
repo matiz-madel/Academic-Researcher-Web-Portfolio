@@ -12,7 +12,8 @@ class ExternalLink extends Model
 
     public array $translatable = [
         'label',
-        'description'
+        'description',
+        'url'
     ];
 
     protected function casts(): array

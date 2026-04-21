@@ -24,6 +24,12 @@ Homestead.json
 Homestead.yaml
 Thumbs.db
 
-# Project exclude paths
+# Ignore the actual database file (Contains your personal data!)
+/database/database.sqlite
+
+# Ignore all user-uploaded files (Avatars, PDFs, Resumes)
+/public/storage
 /storage/app/
+/storage/app/public/*
 /storage/framework/
+!/storage/app/public/.gitignore

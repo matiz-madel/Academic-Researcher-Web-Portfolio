@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('external_links', function (Blueprint $table) {
             $table->id();
-            $table->string('label');
-            $table->string('url', 500);
+            $table->json('label');
+            $table->json('url');
             $table->string('color')->default('#f1f5f9');
             $table->integer('sort')->default(0);
-            $table->string('description')->nullable();
+            $table->json('description')->nullable();
             $table->timestamps();
         });
     }

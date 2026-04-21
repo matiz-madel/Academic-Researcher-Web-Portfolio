@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('employments', function (Blueprint $table) {
             $table->id();
-            $table->string('organization'); // Ex: Tribunal de Justiça do Estado do Paraná (TJPR)
-            $table->string('role')->nullable(); // Ex: Estágio
-            $table->string('department')->nullable(); // Ex: 3º Juizado de Violência Doméstica e Familiar
+            $table->json('organization');
+            $table->json('role')->nullable();
+            $table->json('department')->nullable();
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
-            $table->string('city')->nullable(); // Ex: Curitiba
-            $table->string('country')->nullable(); // Ex: BR
+            $table->string('city')->nullable();
+            $table->json('country')->nullable();
             $table->timestamps();
         });
     }

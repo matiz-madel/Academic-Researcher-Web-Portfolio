@@ -1,58 +1,75 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🎓 Academic & Researcher Portfolio
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A dynamic, fully multilingual, and SEO-driven portfolio built with **Laravel 13**, **Filament v5**, and **TailwindCSS**. This application is designed for researchers, academics, and highly specialized professionals who need their career trajectory to be globally searchable, beautifully presented, and easily translatable.
 
-## About Laravel
+## ✨ Core Features
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+* **🌐 100% Internationalization (i18n):** Native database-driven content translation (via `spatie/laravel-translatable`). Instantly support English, French, Portuguese, Spanish, and more.
+* **🔍 Academic SEO & Metadata:** Built-in visual management for Open Graph tags, JSON-LD schemas, and academic identifiers (ORCID, Lattes, Google Scholar, ResearchGate) to ensure your profile ranks perfectly on search engines.
+* **🏗️ Dynamic Layout (Drag & Drop):** Reorder, hide, or prioritize your portfolio sections (Publications, Education, Funding, Professional Activities) directly from the admin panel without touching a single line of code.
+* **🛡️ Security by Obscurity:** The admin panel URL is dynamic and securely defined via `.env` variables, preventing automated bot attacks.
+* **🧠 Decoupled Architecture:** The public identity (`PublicProfile`) is strictly separated from the system authentication (`User`), adhering to the Single Responsibility Principle (SRP).
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 🚀 Installation & Local Deployment
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+This project uses **SQLite** as the default database to ensure a *zero-config* setup. You do not need to configure MySQL or external servers to get this running.
 
-## Learning Laravel
+### 1. Prerequisites
+* PHP 8.4 or higher
+* Composer
+* Node.js & NPM
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
-
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+### 2. Clone and Install
+Clone the repository and install the required dependencies:
 
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+git clone [https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git](https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git)
+cd YOUR_REPO_NAME
+composer install
+npm install
+npm run build
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+### 3. Environment Configuration
+Duplicate the environment template:
 
-## Contributing
+```bash
+cp .env.example .env
+php artisan key:generate
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Open the `.env` file and **configure your admin panel credentials**. These variables will be read automatically by the database seeders:
 
-## Code of Conduct
+```env
+FILAMENT_ADMIN_PATH=my-secret-panel
+ADMIN_NAME="Your Name"
+ADMIN_EMAIL="you@example.com"
+ADMIN_PASSWORD="AStrongPassword123"
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 4. Database Initialization
+We do not use dummy data (Faker). The command below will create the necessary tables and inject the default languages, your admin user, and the layout structure:
 
-## Security Vulnerabilities
+```bash
+php artisan migrate:fresh --seed
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 5. Run the Server
 
-## License
+```bash
+php artisan serve
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Access your public portfolio at `http://localhost:8000` and manage your content securely at the route you defined in your `.env` (e.g., `http://localhost:8000/admin`).
+
+---
+
+## 🛠️ Technology Stack
+
+* **Backend:** Laravel 13
+* **Admin Panel:** Filament PHP v5
+* **Database Translations:** Spatie Laravel Translatable (+ LaraZeus)
+* **Frontend:** Blade Components + TailwindCSS + Alpine.js
+
+## 📝 License
+This project is open-sourced software licensed under the [MIT License](https://opensource.org/licenses/MIT). Feel free to fork it, customize the Blade views, and build your own globally accessible academic footprint!

@@ -4,11 +4,9 @@ A dynamic, fully multilingual, and SEO-driven portfolio built with **Laravel 13*
 
 ## ✨ Core Features
 
-* **🌐 100% Internationalization (i18n):** Native database-driven content translation (via `spatie/laravel-translatable`). Instantly support English, French, Portuguese, Spanish, and more.
+* **🌐 100% Internationalization (i18n):** Native database-driven content translation (via `spatie/laravel-translatable`). Instantly support English, French, Brasilian Portuguese, Spanish, and more.
 * **🔍 Academic SEO & Metadata:** Built-in visual management for Open Graph tags, JSON-LD schemas, and academic identifiers (ORCID, Lattes, Google Scholar, ResearchGate) to ensure your profile ranks perfectly on search engines.
 * **🏗️ Dynamic Layout (Drag & Drop):** Reorder, hide, or prioritize your portfolio sections (Publications, Education, Funding, Professional Activities) directly from the admin panel without touching a single line of code.
-* **🛡️ Security by Obscurity:** The admin panel URL is dynamic and securely defined via `.env` variables, preventing automated bot attacks.
-* **🧠 Decoupled Architecture:** The public identity (`PublicProfile`) is strictly separated from the system authentication (`User`), adhering to the Single Responsibility Principle (SRP).
 
 ## 🚀 Installation & Local Deployment
 

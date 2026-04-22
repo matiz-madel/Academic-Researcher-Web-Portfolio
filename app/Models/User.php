@@ -31,13 +31,11 @@ class User extends Authenticatable implements FilamentUser
         ];
     }
 
-    // Garante acesso no Filament V3
     public function canAccessPanel(Panel $panel): bool
     {
         return true;
     }
-
-    // Garante acesso no Filament V2 (Seguro-mor)
+    
     public function canAccessFilament(): bool
     {
         return true;

@@ -24,6 +24,7 @@ class MetadataForm
                         ->label(__('admin.fields.favicon'))
                         ->image()
                         ->disk('public')
+                        ->maxSize(1048576) // 1GB limit
                         ->directory('seo')
                         ->avatar()
                         ->helperText(__('admin.fields.favicon_helper')),
@@ -46,9 +47,10 @@ class MetadataForm
                         ->label(__('admin.fields.avatar_og'))
                         ->image()
                         ->disk('public')
+                        ->maxSize(1048576) // 1GB limit
                         ->directory('seo')
                         ->imageEditor()
-                        ->imageAspectRatio('1.91:1') // Optimized for social sharing (1200x630)
+                        ->imageAspectRatio('1200:630') // Optimized for social sharing (1200x630)
                         ->helperText(__('admin.fields.avatar_og_helper')),
 
                     KeyValue::make('social_metadata')

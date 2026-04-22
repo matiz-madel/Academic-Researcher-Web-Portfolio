@@ -65,12 +65,14 @@ class PublicProfileForm
                     ->label(__('admin.fields.avatar_jpeg'))
                     ->image()
                     ->disk('public')
+                    ->maxSize(1048576) // 1GB limit
                     ->acceptedFileTypes(['image/jpeg', 'image/jpg', 'image/png'])
                     ->directory('avatars'),
                 FileUpload::make('avatar_gif')
                     ->label(__('admin.fields.avatar_gif'))
                     ->image()
                     ->disk('public')
+                    ->maxSize(1048576) // 1GB limit
                     ->acceptedFileTypes(['image/gif'])
                     ->directory('avatars'),
                 ])->columnSpanFull(),
@@ -78,8 +80,8 @@ class PublicProfileForm
                     ->label(__('admin.fields.download_resume'))
                     ->acceptedFileTypes(['application/pdf'])
                     ->disk('public')
+                    ->maxSize(1048576) // 1GB limit
                     ->directory('resumes')
-                    ->maxSize(102400) // 1GB limit
                     ->downloadable()
                     ->helperText(__('admin.fields.download_resume_helper'))
                     ->columnSpanFull(),

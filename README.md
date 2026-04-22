@@ -19,14 +19,14 @@ sudo apt install -y php8.4 php8.4-cli php8.4-fpm php8.4-sqlite3 php8.4-xml php8.
 ### 2. Composer (PHP Package Manager)
 Required to install Laravel and its backend dependencies.
 ```bash
-curl -sS [https://getcomposer.org/installer](https://getcomposer.org/installer) | php
+curl -sS https://getcomposer.org/installer | php
 sudo mv composer.phar /usr/local/bin/composer
 ```
 
 ### 3. Node.js 20+ & NPM
 Required for compiling Vite 8 assets (Tailwind CSS, JavaScript).
 ```bash
-curl -fsSL [https://deb.nodesource.com/setup_20.x](https://deb.nodesource.com/setup_20.x) | sudo -E bash -
+curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
 sudo apt-get install -y nodejs
 ```
 

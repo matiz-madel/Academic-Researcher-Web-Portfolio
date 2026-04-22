@@ -58,7 +58,12 @@ cp .env.example .env
 ### 3. Environment & Database Setup (MySQL)
 The project uses MySQL for the production database. You must create an empty database and a database user in your server (e.g., via the HestiaCP panel or MySQL CLI) before proceeding.
 
+```bash
+nano .env
+```
+
 Edit the `.env` file to reflect the production environment. **Pay special attention to URL and Proxy variables**:
+
 ```env
 APP_ENV=production
 APP_DEBUG=false

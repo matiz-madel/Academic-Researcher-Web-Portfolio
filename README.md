@@ -13,20 +13,20 @@ Filament 5 and Laravel 13 require PHP 8.4 and specific extensions (including `sq
 ```bash
 sudo add-apt-repository ppa:ondrej/php -y
 sudo apt update
-sudo apt install -y php8.4 php8.4-cli php8.4-fpm php8.4-sqlite3 php8.4-xml php8.4-mbstring php8.4-curl php8.4-zip php8.4-gd php8.4-intl php8.4-bcmath php8.4-ctype php8.4-dom php8.4-fileinfo php8.4-filter php8.4-hash php8.4-openssl php8.4-pcre php8.4-pdo php8.4-session php8.4-tokenizer
+sudo apt install -y php8.4 php8.4-cli php8.4-fpm php8.4-mysql php8.4-xml php8.4-mbstring php8.4-curl php8.4-zip php8.4-gd php8.4-intl php8.4-bcmath php8.4-ctype php8.4-dom php8.4-fileinfo php8.4-filter php8.4-hash php8.4-openssl php8.4-pcre php8.4-pdo php8.4-session php8.4-tokenizer
 ```
 
 ### 2. Composer (PHP Package Manager)
 Required to install Laravel and its backend dependencies.
 ```bash
-curl -sS [https://getcomposer.org/installer](https://getcomposer.org/installer) | php
+curl -sS https://getcomposer.org/installer | php
 sudo mv composer.phar /usr/local/bin/composer
 ```
 
 ### 3. Node.js 20+ & NPM
 Required for compiling Vite 8 assets (Tailwind CSS, JavaScript).
 ```bash
-curl -fsSL [https://deb.nodesource.com/setup_20.x](https://deb.nodesource.com/setup_20.x) | sudo -E bash -
+curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
 sudo apt-get install -y nodejs
 ```
 
@@ -45,16 +45,18 @@ Follow these steps strictly in order to ensure a perfect deployment, especially 
 ### 1. Clone the Repository
 Navigate to your domain's public folder (e.g., `public_html`) and clone the project:
 ```bash
-git clone [https://github.com/matiz-madel/Academic-Researcher-Web-Portfolio.git](https://github.com/matiz-madel/Academic-Researcher-Web-Portfolio.git) .
+git clone https://github.com/matiz-madel/Academic-Researcher-Web-Portfolio.git .
 ```
 
-### 2. Environment & Database Setup (SQLite)
-The project uses SQLite for maximum portability. Create the physical database file and copy the environment configurations:
+Markdown
+### 2. Back-end Setup & Dependencies
+Laravel's command-line tool (`artisan`) requires the vendor packages to be installed first. Run Composer to download the dependencies before setting up your environment variables:
 ```bash
-touch database/database.sqlite
+composer install --optimize-autoloader --no-dev
 cp .env.example .env
-php artisan key:generate
 ```
+### 3. Environment & Database Setup (MySQL)
+The project uses MySQL for the production database. You must create an empty database and a database user in your server (e.g., via the HestiaCP panel or MySQL CLI) before proceeding.
 
 Edit the `.env` file to reflect the production environment. **Pay special attention to URL and Proxy variables**:
 ```env
@@ -75,12 +77,13 @@ DB_USERNAME=database_username
 DB_PASSWORD=MyPassword
 ```
 
-### 3. Back-end Dependencies & Migrations
-Install PHP packages optimized for production and run the migrations:
+Once the .env file is saved with your valid MySQL credentials, generate the application key and run the database migrations:
+
 ```bash
-composer install --optimize-autoloader --no-dev
+php artisan key:generate
 php artisan migrate --seed
 ```
+
 > **💡 Important Note regarding the Seeder:** > The database seeder (`--seed`) is pre-configured with reduced sample information. It automatically fills out the public profile and layout sections to serve as an example of what kind of content should be entered in each field. It also provisions the default languages to prevent routing errors.
 
 ### 4. Front-end Dependencies (Vite Build)
@@ -112,7 +115,13 @@ php artisan optimize:clear
 php artisan view:clear
 php artisan optimize
 ```
-
+### 7. Access the Admin Panel
+Once the installation is complete, you can access the Filament admin panel by navigating to:
+```text
+URL: https://your-domain.com/admin  (or your .env's custom path)
+Email: name@example.com             (Replace with your .env's email)
+Password: YourStrongPasswordHere    (Replace with your .env's password)
+```
 ---
 
 ## 🛡️ Troubleshooting

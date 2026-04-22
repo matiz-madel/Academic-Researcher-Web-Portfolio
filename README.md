@@ -1,73 +1,125 @@
-# 🎓 Academic & Researcher Portfolio
+# 🚀 Academic Researcher Portfolio
 
-A dynamic, fully multilingual, and SEO-driven portfolio built with **Laravel 13**, **Filament v5**, and **TailwindCSS**. This application is designed for researchers, academics, and highly specialized professionals who need their career trajectory to be globally searchable, beautifully presented, and easily translatable.
+A dynamic, fully-featured portfolio platform built with **Laravel 13** and **Filament 5**, supporting multi-language content, publication management, and layout customization.
 
-## ✨ Core Features
+---
 
-* **🌐 100% Internationalization (i18n):** Native database-driven content translation (via `spatie/laravel-translatable`). Instantly support English, French, Brasilian Portuguese, Spanish, and more.
-* **🔍 Academic SEO & Metadata:** Built-in visual management for Open Graph tags, JSON-LD schemas, and academic identifiers (ORCID, Lattes, Google Scholar, ResearchGate) to ensure your profile ranks perfectly on search engines.
-* **🏗️ Dynamic Layout (Drag & Drop):** Reorder, hide, or prioritize your portfolio sections (Publications, Education, Funding, Professional Activities) directly from the admin panel without touching a single line of code.
+## 📋 Server Prerequisites (Ubuntu Production)
 
-## 🚀 Installation & Local Deployment
+To run this project on an Ubuntu server (VPS), you must install the following stack. Run the commands below as a `root` or `sudo` user to set up your environment.
 
-This project uses **SQLite** as the default database to ensure a *zero-config* setup. You do not need to configure MySQL or external servers to get this running.
-
-### 1. Prerequisites
-* PHP 8.4 or higher
-* Composer
-* Node.js & NPM
-
-### 2. Clone and Install
-Clone the repository and install the required dependencies:
-
+### 1. PHP 8.4 & Required Extensions
+Filament 5 and Laravel 13 require PHP 8.4 and specific extensions (including `sqlite3` for the database).
 ```bash
-git clone [https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git](https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git)
-cd YOUR_REPO_NAME
-composer install
-npm install
-npm run build
+sudo add-apt-repository ppa:ondrej/php -y
+sudo apt update
+sudo apt install -y php8.4 php8.4-cli php8.4-fpm php8.4-sqlite3 php8.4-xml php8.4-mbstring php8.4-curl php8.4-zip php8.4-gd php8.4-intl php8.4-bcmath php8.4-ctype php8.4-dom php8.4-fileinfo php8.4-filter php8.4-hash php8.4-openssl php8.4-pcre php8.4-pdo php8.4-session php8.4-tokenizer
 ```
 
-### 3. Environment Configuration
-Duplicate the environment template:
-
+### 2. Composer (PHP Package Manager)
+Required to install Laravel and its backend dependencies.
 ```bash
+curl -sS [https://getcomposer.org/installer](https://getcomposer.org/installer) | php
+sudo mv composer.phar /usr/local/bin/composer
+```
+
+### 3. Node.js 20+ & NPM
+Required for compiling Vite 8 assets (Tailwind CSS, JavaScript).
+```bash
+curl -fsSL [https://deb.nodesource.com/setup_20.x](https://deb.nodesource.com/setup_20.x) | sudo -E bash -
+sudo apt-get install -y nodejs
+```
+
+### 4. Git
+Required to clone the repository.
+```bash
+sudo apt install git -y
+```
+
+---
+
+## ⚙️ Installation Guide (Ubuntu / HestiaCP / Nginx)
+
+Follow these steps strictly in order to ensure a perfect deployment, especially if you are behind reverse proxies or strict control panels.
+
+### 1. Clone the Repository
+Navigate to your domain's public folder (e.g., `public_html`) and clone the project:
+```bash
+git clone [https://github.com/matiz-madel/Academic-Researcher-Web-Portfolio.git](https://github.com/matiz-madel/Academic-Researcher-Web-Portfolio.git) .
+```
+
+### 2. Environment & Database Setup (SQLite)
+The project uses SQLite for maximum portability. Create the physical database file and copy the environment configurations:
+```bash
+touch database/database.sqlite
 cp .env.example .env
 php artisan key:generate
 ```
 
-Open the `.env` file and **configure your admin panel credentials**. These variables will be read automatically by the database seeders:
-
+Edit the `.env` file to reflect the production environment. **Pay special attention to URL and Proxy variables**:
 ```env
-FILAMENT_ADMIN_PATH=my-secret-panel
-ADMIN_NAME="Your Name"
-ADMIN_EMAIL="you@example.com"
-ADMIN_PASSWORD="AStrongPassword123"
+APP_ENV=production
+APP_DEBUG=false
+APP_URL=https://your-domain.com
+ASSET_URL=https://your-domain.com
+
+ADMIN_NAME="Admin Name"
+ADMIN_EMAIL="name@example.com"
+ADMIN_PASSWORD="YourStrongPasswordHere"
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=database_name
+DB_USERNAME=database_username
+DB_PASSWORD=MyPassword
 ```
 
-### 4. Database Initialization
-We do not use dummy data (Faker). The command below will create the necessary tables and inject the default languages, your admin user, and the layout structure:
-
+### 3. Back-end Dependencies & Migrations
+Install PHP packages optimized for production and run the migrations:
 ```bash
-php artisan migrate:fresh --seed
+composer install --optimize-autoloader --no-dev
+php artisan migrate --seed
 ```
+> **💡 Important Note regarding the Seeder:** > The database seeder (`--seed`) is pre-configured with reduced sample information. It automatically fills out the public profile and layout sections to serve as an example of what kind of content should be entered in each field. It also provisions the default languages to prevent routing errors.
 
-### 5. Run the Server
-
+### 4. Front-end Dependencies (Vite Build)
+Install NPM packages and compile the visual assets:
 ```bash
-php artisan serve
+npm install
+npm run build
 ```
 
-Access your public portfolio at `http://localhost:8000` and manage your content securely at the route you defined in your `.env` (e.g., `http://localhost:8000/admin`).
+### 5. Symlinks & Permissions (Crucial for Proxies/HestiaCP)
+Strict security panels block absolute paths, which causes 403 Errors on uploaded images. Delete the native folder and create a secure *relative symlink*:
+```bash
+# Create a secure relative symlink
+cd public
+rm -rf storage
+ln -s ../storage/app/public storage
+cd ..
+
+# Adjust permissions for the Web Server to write files safely
+find storage -type d -exec chmod 755 {} \;
+find storage -type f -exec chmod 644 {} \;
+chmod -R 775 storage/app/public storage/framework storage/logs bootstrap/cache
+```
+
+### 6. Final Optimization & Caching
+Whenever you change the `.env` file or update the code, clear and rebuild the cache. This step guarantees peak performance and prevents the "403 Forbidden" error in the Livewire/Filament admin panel:
+```bash
+php artisan optimize:clear
+php artisan view:clear
+php artisan optimize
+```
 
 ---
 
-## 🛠️ Technology Stack
+## 🛡️ Troubleshooting
 
-* **Backend:** Laravel 13
-* **Admin Panel:** Filament PHP v5
-* **Database Translations:** Spatie Laravel Translatable (+ LaraZeus)
-* **Frontend:** Blade Components + TailwindCSS + Alpine.js
+* **500 Error when accessing the site:** Ensure the cache folders exist (`storage/framework/sessions`, `storage/framework/views`, etc.) and the web server has write permissions (`chmod 775`). The repository includes `.gitkeep` files to prevent this.
+* **403 Error on Filament Login Form:** Your proxy (Nginx) is not passing HTTPS headers correctly to Livewire. Ensure the `.env` has `ASSET_URL` declared with `https://` and that you ran `php artisan optimize` after the change.
+* **Broken Images / Uploads failing:** The server's `open_basedir` is blocking the absolute symlink. Recreate the link using a relative path `ln -s ../storage/app/public storage` inside the `public` folder.
 
-## 📝 License
-This project is open-sourced software licensed under the [MIT License](https://opensource.org/licenses/MIT). Feel free to fork it, customize the Blade views, and build your own globally accessible academic footprint!
+---
+Developed by *Matiz Madel*®

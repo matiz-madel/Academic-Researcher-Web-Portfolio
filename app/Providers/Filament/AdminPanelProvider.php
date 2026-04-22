@@ -29,23 +29,16 @@ class AdminPanelProvider extends PanelProvider
         $brandName = 'Admin Panel';
         $customPath = config('app.admin_path') ?? 'admin';
         $faviconUrl = asset('favicon.ico');
-        try {
-            $profile = PublicProfile::first();
-            if ($profile) {
-                $brandName = $profile->full_name;
-            }
+        $locales = ['fr'];
 
-            $metadata = Metadata::first();
-            if ($metadata && $metadata->favicon) {
-                $faviconUrl = asset('storage/' . $metadata->favicon);
-            }
-        } catch (\Exception $e) {
-            // Fails silently during migrations
-        }
+        if (! app()->runningInConsole()) {
+            $brandName = rescue(fn () => PublicProfile::first()?->full_name, $brandName, false) ?: $brandName;
 
-        $locales = [];
-        if (\Illuminate\Support\Facades\Schema::hasTable('languages')) {
-            $locales = \App\Models\Language::where('is_active', true)->pluck('code')->toArray();
+            $favicon = rescue(fn () => Metadata::first()?->favicon, null, false);
+            $faviconUrl = $favicon ? asset('storage/' . $favicon) : $faviconUrl;
+
+            $bancoLocales = rescue(fn () => \App\Models\Language::where('active', true)->pluck('code')->toArray(), [], false);
+            $locales = !empty($bancoLocales) ? $bancoLocales : $locales;
         }
 
         return $panel

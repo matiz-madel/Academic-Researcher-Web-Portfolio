@@ -62,24 +62,22 @@ The project uses MySQL for the production database. You must create an empty dat
 nano .env
 ```
 
-Edit the `.env` file to reflect the production environment. **Pay special attention to URL and Proxy variables**:
+Edit the `.env` file to reflect the production environment. **Pay special attention to this variables**:
 
 ```env
-APP_ENV=production
-APP_DEBUG=false
-APP_URL=https://your-domain.com
-ASSET_URL=https://your-domain.com
-
-ADMIN_NAME="Admin Name"
-ADMIN_EMAIL="name@example.com"
+APP_NAME="Your Name"
+...
+APP_URL=https://domain.com
+...
+FILAMENT_ADMIN_PATH=my-secret-panel
+...
+ADMIN_NAME="Your Name"
+ADMIN_EMAIL="admin@domain.com"
 ADMIN_PASSWORD="YourStrongPasswordHere"
-
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
+...
 DB_DATABASE=database_name
 DB_USERNAME=database_username
-DB_PASSWORD=MyPassword
+DB_PASSWORD=MyPassword123
 ```
 
 Press `Ctrl + O` to save and `Ctrl + X` to close the file.

@@ -14,23 +14,29 @@
                     this.gifTimestamp = Date.now();
                     setTimeout(() => { this.isPlaying = false; }, 5000);
                 }
-             }"
-                 @scroll.window="playGif()">
+            }"
+            @if($public_profile?->has_gif) @scroll.window="playGif()" @endif>
 
                 <div @click="modalOpen = true" class="relative w-32 h-32 shrink-0 rounded-full overflow-hidden shadow-lg border-2 border-slate-100 dark:border-slate-700 group cursor-pointer bg-white dark:bg-slate-800">
 
-                    @if($public_profile && $public_profile->avatar_jpeg)
-                        <img src="{{ asset('storage/'. $public_profile->avatar_jpeg) }}" alt="{{__('admin.fields.profile_picture_avatar')}}"
-                             class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 md:group-hover:opacity-0"
-                             :class="isPlaying? 'opacity-0 md:opacity-100' : 'opacity-100'">
+                    {{-- Static Avatar OR Gray Fallback --}}
+                    @if($public_profile?->has_avatar)
+                        <img src="{{ asset('storage/'. $public_profile->avatar_jpeg) }}"
+                             alt="{{__('admin.fields.profile_picture_avatar')}}"
+                             class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 {{ $public_profile->has_gif ? 'md:group-hover:opacity-0' : '' }}"
+                             @if($public_profile->has_gif) :class="isPlaying ? 'opacity-0' : 'opacity-100'" @endif>
                     @else
-                        <div class="absolute inset-0 w-full h-full bg-slate-900 dark:bg-slate-100 flex items-center justify-center text-white dark:text-slate-900 text-3xl font-serif font-bold">MM</div>
+                        <div class="absolute inset-0 w-full h-full bg-slate-200 dark:bg-slate-700 transition-opacity duration-500 {{ $public_profile?->has_gif ? 'md:group-hover:opacity-0' : '' }}"
+                             @if($public_profile?->has_gif) :class="isPlaying ? 'opacity-0' : 'opacity-100'" @endif>
+                        </div>
                     @endif
 
-                    @if($public_profile && $public_profile->avatar_gif)
-                        <img :src="'{{ asset('storage/'. $public_profile->avatar_gif) }}?t=' + gifTimestamp" alt="{{__('admin.fields.profile_picture_avatar')}}"
-                             class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 md:group-hover:opacity-100"
-                             :class="isPlaying? 'opacity-100 md:opacity-0' : 'opacity-0'">
+                    {{-- Animated GIF (Conditional Rendering) --}}
+                    @if($public_profile?->has_gif)
+                        <img :src="`{{ asset('storage/'. $public_profile->avatar_gif) }}?t=${gifTimestamp}`"
+                             alt="{{__('admin.fields.profile_picture_gif')}}"
+                             class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0 md:group-hover:opacity-100"
+                             :class="isPlaying ? 'opacity-100' : 'opacity-0'">
                     @endif
                 </div>
 
@@ -40,19 +46,25 @@
                         <div class="relative max-w-2xl w-full" x-transition>
                             <button @click="modalOpen = false" class="absolute -top-10 right-0 text-white text-4xl hover:text-gray-300">&times;</button>
 
-                            @if($public_profile && $public_profile->avatar_jpeg)
-                                <div class="relative w-full h-auto group">
+                            <div class="relative w-full aspect-square md:aspect-auto group">
+                                {{-- Modal Static Avatar OR Gray Fallback --}}
+                                @if($public_profile?->has_avatar)
                                     <img src="{{ asset('storage/'. $public_profile->avatar_jpeg) }}" alt="{{__('admin.fields.profile_picture_avatar')}}"
-                                         class="w-full h-auto rounded-sm shadow-2xl transition-opacity duration-500 md:group-hover:opacity-0"
-                                         :class="isPlaying? 'opacity-0' : 'opacity-100'">
+                                         class="w-full h-auto rounded-sm shadow-2xl transition-opacity duration-500 {{ $public_profile->has_gif ? 'md:group-hover:opacity-0' : '' }}"
+                                         @if($public_profile->has_gif) :class="isPlaying? 'opacity-0' : 'opacity-100'" @endif>
+                                @else
+                                    <div class="w-full h-full min-h-75 bg-slate-200 dark:bg-slate-800 rounded-sm shadow-2xl transition-opacity duration-500 {{ $public_profile?->has_gif ? 'md:group-hover:opacity-0' : '' }}"
+                                         @if($public_profile?->has_gif) :class="isPlaying? 'opacity-0' : 'opacity-100'" @endif>
+                                    </div>
+                                @endif
 
-                                    @if($public_profile->avatar_gif)
-                                        <img :src="'{{ asset('storage/'. $public_profile->avatar_gif) }}?t=' + gifTimestamp" alt="{{__('admin.fields.profile_picture_avatar_in_motion')}}"
-                                             class="absolute inset-0 w-full h-full object-cover rounded-sm shadow-2xl transition-opacity duration-500 md:group-hover:opacity-100"
-                                             :class="isPlaying? 'opacity-100' : 'opacity-0'">
-                                    @endif
-                                </div>
-                            @endif
+                                {{-- Modal Animated GIF --}}
+                                @if($public_profile?->has_gif)
+                                    <img :src="'{{ asset('storage/'. $public_profile->avatar_gif) }}?t=' + gifTimestamp" alt="{{__('admin.fields.profile_picture_avatar_in_motion')}}"
+                                         class="absolute inset-0 w-full h-full object-cover rounded-sm shadow-2xl transition-opacity duration-500 md:group-hover:opacity-100"
+                                         :class="isPlaying? 'opacity-100' : 'opacity-0'">
+                                @endif
+                            </div>
                         </div>
                     </div>
                 </template>

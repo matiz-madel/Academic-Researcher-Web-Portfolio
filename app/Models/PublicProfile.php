@@ -82,4 +82,22 @@ class PublicProfile extends Model
 
         return array_unique(array_filter($titles));
     }
+
+    /**
+     * Check if the profile has a valid static avatar assigned.
+     */
+    public function getHasAvatarAttribute(): bool
+    {
+        return !empty($this->avatar_jpeg);
+    }
+
+    /**
+     * Check if the profile has a valid GIF avatar assigned.
+     * This encapsulates the logic into the Model, keeping the View clean.
+     */
+    public function getHasGifAttribute(): bool
+    {
+        return !empty($this->avatar_gif);
+    }
+
 }

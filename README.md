@@ -13,7 +13,7 @@ Filament 5 and Laravel 13 require PHP 8.4 and specific extensions (including `sq
 ```bash
 sudo add-apt-repository ppa:ondrej/php -y
 sudo apt update
-sudo apt install -y php8.4 php8.4-cli php8.4-fpm php8.4-mysql php8.4-xml php8.4-mbstring php8.4-curl php8.4-zip php8.4-gd php8.4-intl php8.4-bcmath php8.4-ctype php8.4-dom php8.4-fileinfo php8.4-filter php8.4-hash php8.4-openssl php8.4-pcre php8.4-pdo php8.4-session php8.4-tokenizer
+sudo apt install -y php8.4 php8.4-cli php8.4-fpm php8.4-mysql php8.4-xml php8.4-mbstring php8.4-curl php8.4-zip php8.4-gd php8.4-intl php8.4-bcmath unzip
 ```
 
 ### 2. Composer (PHP Package Manager)
@@ -82,6 +82,8 @@ DB_USERNAME=database_username
 DB_PASSWORD=MyPassword
 ```
 
+Press `Ctrl + O` to save and `Ctrl + X` to close the file.
+
 Once the .env file is saved with your valid MySQL credentials, generate the application key and run the database migrations:
 
 ```bash
@@ -127,13 +129,6 @@ URL: https://your-domain.com/admin  (or your .env's custom path)
 Email: name@example.com             (Replace with your .env's email)
 Password: YourStrongPasswordHere    (Replace with your .env's password)
 ```
----
-
-## 🛡️ Troubleshooting
-
-* **500 Error when accessing the site:** Ensure the cache folders exist (`storage/framework/sessions`, `storage/framework/views`, etc.) and the web server has write permissions (`chmod 775`). The repository includes `.gitkeep` files to prevent this.
-* **403 Error on Filament Login Form:** Your proxy (Nginx) is not passing HTTPS headers correctly to Livewire. Ensure the `.env` has `ASSET_URL` declared with `https://` and that you ran `php artisan optimize` after the change.
-* **Broken Images / Uploads failing:** The server's `open_basedir` is blocking the absolute symlink. Recreate the link using a relative path `ln -s ../storage/app/public storage` inside the `public` folder.
 
 ---
 Developed by *Matiz Madel*®

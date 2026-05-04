@@ -14,7 +14,7 @@
                 @php
                     $componentName = 'categories.' . Str::singular($category->identifier);
                     // Pass the specific data collection to the component
-                    $$categoryData = ${$category->identifier};
+                    $categoryData = ${$category->identifier};
                 @endphp
 
                 <x-dynamic-component :component="$componentName" :data="$categoryData" />

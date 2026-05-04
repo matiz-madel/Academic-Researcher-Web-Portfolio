@@ -13,7 +13,7 @@ Filament 5 and Laravel 13 require PHP 8.4 and specific extensions (including `sq
 ```bash
 sudo add-apt-repository ppa:ondrej/php -y
 sudo apt update
-sudo apt install -y php8.4 php8.4-cli php8.4-fpm php8.4-mysql php8.4-xml php8.4-mbstring php8.4-curl php8.4-zip php8.4-gd php8.4-intl php8.4-bcmath php8.4-ctype php8.4-dom php8.4-fileinfo php8.4-filter php8.4-hash php8.4-openssl php8.4-pcre php8.4-pdo php8.4-session php8.4-tokenizer
+sudo apt install -y php8.4 php8.4-cli php8.4-fpm php8.4-mysql php8.4-xml php8.4-mbstring php8.4-curl php8.4-zip php8.4-gd php8.4-intl php8.4-bcmath unzip
 ```
 
 ### 2. Composer (PHP Package Manager)
@@ -62,25 +62,25 @@ The project uses MySQL for the production database. You must create an empty dat
 nano .env
 ```
 
-Edit the `.env` file to reflect the production environment. **Pay special attention to URL and Proxy variables**:
+Edit the `.env` file to reflect the production environment. **Pay special attention to this variables**:
 
 ```env
-APP_ENV=production
-APP_DEBUG=false
-APP_URL=https://your-domain.com
-ASSET_URL=https://your-domain.com
-
-ADMIN_NAME="Admin Name"
-ADMIN_EMAIL="name@example.com"
+APP_NAME="Your Name"
+...
+APP_URL=https://domain.com
+...
+FILAMENT_ADMIN_PATH=my-secret-panel
+...
+ADMIN_NAME="Your Name"
+ADMIN_EMAIL="admin@domain.com"
 ADMIN_PASSWORD="YourStrongPasswordHere"
-
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
+...
 DB_DATABASE=database_name
 DB_USERNAME=database_username
-DB_PASSWORD=MyPassword
+DB_PASSWORD=MyPassword123
 ```
+
+Press `Ctrl + O` to save and `Ctrl + X` to close the file.
 
 Once the .env file is saved with your valid MySQL credentials, generate the application key and run the database migrations:
 
@@ -127,13 +127,6 @@ URL: https://your-domain.com/admin  (or your .env's custom path)
 Email: name@example.com             (Replace with your .env's email)
 Password: YourStrongPasswordHere    (Replace with your .env's password)
 ```
----
-
-## 🛡️ Troubleshooting
-
-* **500 Error when accessing the site:** Ensure the cache folders exist (`storage/framework/sessions`, `storage/framework/views`, etc.) and the web server has write permissions (`chmod 775`). The repository includes `.gitkeep` files to prevent this.
-* **403 Error on Filament Login Form:** Your proxy (Nginx) is not passing HTTPS headers correctly to Livewire. Ensure the `.env` has `ASSET_URL` declared with `https://` and that you ran `php artisan optimize` after the change.
-* **Broken Images / Uploads failing:** The server's `open_basedir` is blocking the absolute symlink. Recreate the link using a relative path `ln -s ../storage/app/public storage` inside the `public` folder.
 
 ---
 Developed by *Matiz Madel*®

@@ -37,7 +37,7 @@ class AdminPanelProvider extends PanelProvider
             $favicon = rescue(fn () => Metadata::first()?->favicon, null, false);
             $faviconUrl = $favicon ? asset('storage/' . $favicon) : $faviconUrl;
 
-            $bancoLocales = rescue(fn () => \App\Models\Language::where('active', true)->pluck('code')->toArray(), [], false);
+            $bancoLocales = rescue(fn () => \App\Models\Language::where('is_active', true)->pluck('code')->toArray(), [], false);
             $locales = !empty($bancoLocales) ? $bancoLocales : $locales;
         }
 

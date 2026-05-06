@@ -14,51 +14,94 @@
 <meta name="theme-color" content="{{ $metadata?->theme_color ?? '#ffffff' }}">
 <meta name="robots" content="{{ $metadata?->robots ?? 'index, follow' }}">
 
-{{-- Safely parse fields: Separate HTML meta tags from JSON-LD sameAs links --}}
+{{-- Safely parse fields and construct JSON-LD purely in PHP --}}
 @php
     $sameAsLinks = [];
     $metaTagsToRender = [];
 
-    // Reserved keys that have explicit places in JSON-LD
-    $jsonLdReservedKeys = ['knows_about', 'name', 'url', 'type', 'Person'];
-
-    // 1. Process metadata resolved fields (from the Metadata model)
+    // 1. Process metadata resolved fields (HTML Meta Tags & Subsidiaries)
     if (!empty($metadata?->resolved_fields)) {
+        $jsonLdReservedKeys = ['knows_about', 'name', 'url', 'type', 'Person'];
+        
         foreach ($metadata->resolved_fields as $key => $value) {
             if (in_array($key, $jsonLdReservedKeys)) {
                 continue;
             }
 
             $content = is_array($value) ? implode(', ', $value) : $value;
-
             $isUrl = filter_var($content, FILTER_VALIDATE_URL) !== false;
             $isSocialUrlMeta = str_contains($key, 'url');
 
+            // Subsidiary logic: Any valid URL goes to sameAs (unless it's a structural tag like og:url)
             if ($isUrl && !$isSocialUrlMeta) {
-                $sameAsLinks[] = '"' . $content . '"';
+                $sameAsLinks[] = $content; // Store raw URL
             } else {
                 $metaTagsToRender[$key] = $content;
             }
         }
     }
 
-    // 2. Inject External Links (from the ExternalLink model) into the sameAs array
-    // This respects encapsulation as the data is provided by the HomeController
+    // 2. Inject External Links
     if (isset($external_links) && $external_links->isNotEmpty()) {
         foreach ($external_links as $externalLink) {
-            // Get the translated URL based on the current app locale
             $url = $externalLink->getTranslation('url', app()->getLocale());
-            
             if (filter_var($url, FILTER_VALIDATE_URL)) {
-                $sameAsLinks[] = '"' . $url . '"';
+                $sameAsLinks[] = $url;
             }
         }
     }
+    
+    // 3. Build the complete Schema.org JSON-LD object dynamically
+    $jsonLd = [
+        '@context' => 'https://schema.org/',
+        '@type' => 'Person',
+        'name' => $public_profile?->full_name ?? config('app.name'),
+        'url' => url()->current(),
+    ];
 
-    // Ensure unique links in case a URL exists in both Metadata and External Links
-    $sameAsLinks = array_unique($sameAsLinks);
+    // Map alternateName from aliases casted array
+    if (!empty($public_profile?->aliases)) {
+        $jsonLd['alternateName'] = $public_profile->aliases;
+    }
+
+    // Map jobTitle merging subtitle and subtitle_variations
+    if (!empty($public_profile?->all_titles)) {
+        $jsonLd['jobTitle'] = $public_profile->all_titles;
+    }
+
+    // Map knowsLanguage from active languages
+    if (isset($languages) && $languages->isNotEmpty()) {
+        $jsonLd['knowsLanguage'] = $languages->pluck('code')->toArray();
+    }
+
+    // Map alumniOf from unique Educations
+    if (isset($educations) && $educations->isNotEmpty()) {
+        $institutions = $educations->map(function($edu) {
+            return $edu->getTranslation('institution', app()->getLocale());
+        })->unique()->filter()->values();
+
+        if ($institutions->isNotEmpty()) {
+            $jsonLd['alumniOf'] = $institutions->map(function($inst) {
+                return [
+                    '@type' => 'CollegeOrUniversity',
+                    'name' => $inst
+                ];
+            })->toArray();
+        }
+    }
+
+    // Finalize sameAs and knowsAbout
+    $sameAsLinks = array_values(array_unique($sameAsLinks));
+    if (!empty($sameAsLinks)) {
+        $jsonLd['sameAs'] = $sameAsLinks;
+    }
+
+    if (!empty($metadata?->resolved_fields['knows_about'])) {
+        $jsonLd['knowsAbout'] = $metadata->resolved_fields['knows_about'];
+    }
 @endphp
 
+{{-- Render Standard HTML Meta Tags --}}
 @foreach($metaTagsToRender as $key => $content)
     @if(str_starts_with($key, 'og:'))
         <meta property="{{ $key }}" content="{{ $content }}">
@@ -67,16 +110,7 @@
     @endif
 @endforeach
 
-{{-- JSON-LD Knowledge Graph (Using @@ to prevent Blade parsing errors) --}}
+{{-- Render JSON-LD Knowledge Graph securely --}}
 <script type="application/ld+json">
-    {
-      "@@context": "https://schema.org/",
-  "@@type": "Person",
-  "name": "{{ $public_profile ? $public_profile->full_name : '' }}",
-  "url": "{{ url()->current() }}",
-  "sameAs": [
-    {!! implode(",\n    ", $sameAsLinks) !!}
-  ],
-  "knowsAbout": {!! json_encode($metadata->resolved_fields['knows_about'] ?? []) !!}
-    }
+    {!! json_encode($jsonLd, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) !!}
 </script>

@@ -32,15 +32,10 @@
             $content = is_array($value) ? implode(', ', $value) : $value;
 
             $isUrl = filter_var($content, FILTER_VALIDATE_URL) !== false;
-            $isOrcid = $key === 'orcid';
             $isSocialUrlMeta = str_contains($key, 'url');
 
-            if (($isUrl || $isOrcid) && !$isSocialUrlMeta) {
-                $link = $content;
-                if ($isOrcid && !str_starts_with($link, 'http')) {
-                    $link = 'https://orcid.org/' . $link;
-                }
-                $sameAsLinks[] = '"' . $link . '"';
+            if ($isUrl && !$isSocialUrlMeta) {
+                $sameAsLinks[] = '"' . $content . '"';
             } else {
                 $metaTagsToRender[$key] = $content;
             }

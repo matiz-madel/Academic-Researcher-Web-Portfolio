@@ -4,8 +4,7 @@
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
 @endif
 
-<title>{{ $public_profile?->full_name ?? config('app.name') }} @if($metadata?->title_suffix) - {{ $metadata->title_suffix }} @endif</title><meta name="description" content="{{ $metadata?->description }}">
-
+<title>{{ $public_profile?->full_name ?? config('app.name') }} @if($metadata?->title_suffix) - {{ $metadata->title_suffix }} @endif</title>
 <meta name="description" content="{{ $metadata?->description }}">
 <meta name="author" content="{{ $public_profile?->full_name ?? config('app.name') }}">
 
@@ -23,34 +22,46 @@
     // Reserved keys that have explicit places in JSON-LD
     $jsonLdReservedKeys = ['knows_about', 'name', 'url', 'type', 'Person'];
 
+    // 1. Process metadata resolved fields (from the Metadata model)
     if (!empty($metadata?->resolved_fields)) {
         foreach ($metadata->resolved_fields as $key => $value) {
-            // Skip explicit JSON-LD keys so they don't become meta tags or sameAs links
             if (in_array($key, $jsonLdReservedKeys)) {
                 continue;
             }
 
             $content = is_array($value) ? implode(', ', $value) : $value;
 
-            // Subsidiary logic: Detect if the value is a URL to dynamically add to sameAs.
-            // We exclude keys that contain 'url' (like og:url) to keep them as meta tags.
             $isUrl = filter_var($content, FILTER_VALIDATE_URL) !== false;
             $isOrcid = $key === 'orcid';
             $isSocialUrlMeta = str_contains($key, 'url');
 
             if (($isUrl || $isOrcid) && !$isSocialUrlMeta) {
                 $link = $content;
-                // Format ORCID correctly if only the ID was provided
                 if ($isOrcid && !str_starts_with($link, 'http')) {
                     $link = 'https://orcid.org/' . $link;
                 }
                 $sameAsLinks[] = '"' . $link . '"';
             } else {
-                // Everything else falls back to being a standard HTML meta tag
                 $metaTagsToRender[$key] = $content;
             }
         }
     }
+
+    // 2. Inject External Links (from the ExternalLink model) into the sameAs array
+    // This respects encapsulation as the data is provided by the HomeController
+    if (isset($external_links) && $external_links->isNotEmpty()) {
+        foreach ($external_links as $externalLink) {
+            // Get the translated URL based on the current app locale
+            $url = $externalLink->getTranslation('url', app()->getLocale());
+            
+            if (filter_var($url, FILTER_VALIDATE_URL)) {
+                $sameAsLinks[] = '"' . $url . '"';
+            }
+        }
+    }
+
+    // Ensure unique links in case a URL exists in both Metadata and External Links
+    $sameAsLinks = array_unique($sameAsLinks);
 @endphp
 
 @foreach($metaTagsToRender as $key => $content)

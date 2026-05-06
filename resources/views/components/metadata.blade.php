@@ -19,39 +19,7 @@
     $sameAsLinks = [];
     $metaTagsToRender = [];
 
-    // 1. Process metadata resolved fields (HTML Meta Tags & Subsidiaries)
-    if (!empty($metadata?->resolved_fields)) {
-        $jsonLdReservedKeys = ['knows_about', 'name', 'url', 'type', 'Person'];
-        
-        foreach ($metadata->resolved_fields as $key => $value) {
-            if (in_array($key, $jsonLdReservedKeys)) {
-                continue;
-            }
-
-            $content = is_array($value) ? implode(', ', $value) : $value;
-            $isUrl = filter_var($content, FILTER_VALIDATE_URL) !== false;
-            $isSocialUrlMeta = str_contains($key, 'url');
-
-            // Subsidiary logic: Any valid URL goes to sameAs (unless it's a structural tag like og:url)
-            if ($isUrl && !$isSocialUrlMeta) {
-                $sameAsLinks[] = $content; // Store raw URL
-            } else {
-                $metaTagsToRender[$key] = $content;
-            }
-        }
-    }
-
-    // 2. Inject External Links
-    if (isset($external_links) && $external_links->isNotEmpty()) {
-        foreach ($external_links as $externalLink) {
-            $url = $externalLink->getTranslation('url', app()->getLocale());
-            if (filter_var($url, FILTER_VALIDATE_URL)) {
-                $sameAsLinks[] = $url;
-            }
-        }
-    }
-    
-    // 3. Build the complete Schema.org JSON-LD object dynamically
+    // 1. Initialize the Schema.org JSON-LD object
     $jsonLd = [
         '@context' => 'https://schema.org/',
         '@type' => 'Person',
@@ -59,45 +27,62 @@
         'url' => url()->current(),
     ];
 
-    // Map alternateName from aliases casted array
+    // 2. Process metadata resolved fields (Dynamic JSON-LD & Meta Tags)
+    if (!empty($metadata?->resolved_fields)) {
+        foreach ($metadata->resolved_fields as $key => $value) {
+            $content = is_array($value) ? implode(', ', $value) : $value;
+
+            // Social meta tags (e.g., og:title, twitter:card) stay in HTML
+            if (str_contains($key, ':')) {
+                $metaTagsToRender[$key] = $content;
+            }
+            // Valid URLs go to sameAs
+            elseif (filter_var($content, FILTER_VALIDATE_URL)) {
+                $sameAsLinks[] = $content;
+            }
+            // NEW FALLBACK: Everything else injects directly into the JSON-LD
+            else {
+                // Automatically fixes knows_about to schema standard knowsAbout
+                $jsonLd[$key === 'knows_about' ? 'knowsAbout' : $key] = $content;
+            }
+        }
+    }
+
+    // 3. Inject External Links
+    if (isset($external_links) && $external_links->isNotEmpty()) {
+        foreach ($external_links as $link) {
+            if ($url = filter_var($link->getTranslation('url', app()->getLocale()), FILTER_VALIDATE_URL)) {
+                $sameAsLinks[] = $url;
+            }
+        }
+    }
+
+    // 4. Map dynamic properties from other Models
     if (!empty($public_profile?->aliases)) {
         $jsonLd['alternateName'] = $public_profile->aliases;
     }
 
-    // Map jobTitle merging subtitle and subtitle_variations
     if (!empty($public_profile?->all_titles)) {
         $jsonLd['jobTitle'] = $public_profile->all_titles;
     }
 
-    // Map knowsLanguage from active languages
     if (isset($languages) && $languages->isNotEmpty()) {
         $jsonLd['knowsLanguage'] = $languages->pluck('code')->toArray();
     }
 
-    // Map alumniOf from unique Educations
     if (isset($educations) && $educations->isNotEmpty()) {
-        $institutions = $educations->map(function($edu) {
-            return $edu->getTranslation('institution', app()->getLocale());
-        })->unique()->filter()->values();
-
+        $institutions = $educations->map->getTranslation('institution', app()->getLocale())->unique()->filter()->values();
         if ($institutions->isNotEmpty()) {
-            $jsonLd['alumniOf'] = $institutions->map(function($inst) {
-                return [
-                    '@type' => 'CollegeOrUniversity',
-                    'name' => $inst
-                ];
-            })->toArray();
+            $jsonLd['alumniOf'] = $institutions->map(fn($inst) => [
+                '@type' => 'CollegeOrUniversity',
+                'name' => $inst
+            ])->toArray();
         }
     }
 
-    // Finalize sameAs and knowsAbout
-    $sameAsLinks = array_values(array_unique($sameAsLinks));
+    // Finalize sameAs
     if (!empty($sameAsLinks)) {
-        $jsonLd['sameAs'] = $sameAsLinks;
-    }
-
-    if (!empty($metadata?->resolved_fields['knows_about'])) {
-        $jsonLd['knowsAbout'] = $metadata->resolved_fields['knows_about'];
+        $jsonLd['sameAs'] = array_values(array_unique($sameAsLinks));
     }
 @endphp
 

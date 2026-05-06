@@ -15,26 +15,51 @@
 <meta name="theme-color" content="{{ $metadata?->theme_color ?? '#ffffff' }}">
 <meta name="robots" content="{{ $metadata?->robots ?? 'index, follow' }}">
 
-@if($metadata && $metadata->resolved_fields)
-    @foreach($metadata->resolved_fields as $key => $value)
+{{-- Safely parse fields: Separate HTML meta tags from JSON-LD sameAs links --}}
+@php
+    $sameAsLinks = [];
+    $metaTagsToRender = [];
 
-        {{-- Safely skip keys handled specifically in JSON-LD --}}
-        @if(in_array($key, ['knows_about', 'orcid', 'google_scholar']))
-            @continue
-        @endif
+    // Reserved keys that have explicit places in JSON-LD
+    $jsonLdReservedKeys = ['knows_about', 'name', 'url', 'type', 'Person'];
 
-        @php
-            // Ensure arrays are converted to comma-separated strings for HTML content
+    if (!empty($metadata?->resolved_fields)) {
+        foreach ($metadata->resolved_fields as $key => $value) {
+            // Skip explicit JSON-LD keys so they don't become meta tags or sameAs links
+            if (in_array($key, $jsonLdReservedKeys)) {
+                continue;
+            }
+
             $content = is_array($value) ? implode(', ', $value) : $value;
-        @endphp
 
-        @if(str_starts_with($key, 'og:'))
-            <meta property="{{ $key }}" content="{{ $content }}">
-        @else
-            <meta name="{{ $key }}" content="{{ $content }}">
-        @endif
-    @endforeach
-@endif
+            // Subsidiary logic: Detect if the value is a URL to dynamically add to sameAs.
+            // We exclude keys that contain 'url' (like og:url) to keep them as meta tags.
+            $isUrl = filter_var($content, FILTER_VALIDATE_URL) !== false;
+            $isOrcid = $key === 'orcid';
+            $isSocialUrlMeta = str_contains($key, 'url');
+
+            if (($isUrl || $isOrcid) && !$isSocialUrlMeta) {
+                $link = $content;
+                // Format ORCID correctly if only the ID was provided
+                if ($isOrcid && !str_starts_with($link, 'http')) {
+                    $link = 'https://orcid.org/' . $link;
+                }
+                $sameAsLinks[] = '"' . $link . '"';
+            } else {
+                // Everything else falls back to being a standard HTML meta tag
+                $metaTagsToRender[$key] = $content;
+            }
+        }
+    }
+@endphp
+
+@foreach($metaTagsToRender as $key => $content)
+    @if(str_starts_with($key, 'og:'))
+        <meta property="{{ $key }}" content="{{ $content }}">
+    @else
+        <meta name="{{ $key }}" content="{{ $content }}">
+    @endif
+@endforeach
 
 {{-- JSON-LD Knowledge Graph (Using @@ to prevent Blade parsing errors) --}}
 <script type="application/ld+json">
@@ -44,8 +69,7 @@
   "name": "{{ $public_profile ? $public_profile->full_name : '' }}",
   "url": "{{ url()->current() }}",
   "sameAs": [
-    "{{ $metadata->resolved_fields['google_scholar'] ?? '' }}",
-    "https://orcid.org/{{ $metadata->resolved_fields['orcid'] ?? '' }}"
+    {!! implode(",\n    ", $sameAsLinks) !!}
   ],
   "knowsAbout": {!! json_encode($metadata->resolved_fields['knows_about'] ?? []) !!}
     }

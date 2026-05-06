@@ -64,29 +64,21 @@ class MetadataSeeder extends Seeder
 
             'academic_metadata' => [
                 'pt' => [
-                    'lattes' => 'http://lattes.cnpq.br/0000000000000000',
-                    'orcid' => '0000-0000-0000-0000',
                     'research_gate' => 'https://www.researchgate.net/profile/Matiz-Madel',
                     'google_scholar' => 'https://scholar.google.com/',
                     'knows_about' => 'Direito Internacional, Controle de Convencionalidade, Desenvolvimento'
                 ],
                 'en' => [
-                    'lattes' => 'http://lattes.cnpq.br/0000000000000000',
-                    'orcid' => '0000-0000-0000-0000',
                     'research_gate' => 'https://www.researchgate.net/profile/Matiz-Madel',
                     'google_scholar' => 'https://scholar.google.com/',
                     'knows_about' => 'International Law, Conventionality Control, Development'
                 ],
                 'fr' => [
-                    'lattes' => 'http://lattes.cnpq.br/0000000000000000',
-                    'orcid' => '0000-0000-0000-0000',
                     'research_gate' => 'https://www.researchgate.net/profile/Matiz-Madel',
                     'google_scholar' => 'https://scholar.google.com/',
                     'knows_about' => 'Droit International, Contrôle de Conventionnalité, Développement'
                 ],
                 'es' => [
-                    'lattes' => 'http://lattes.cnpq.br/0000000000000000',
-                    'orcid' => '0000-0000-0000-0000',
                     'research_gate' => 'https://www.researchgate.net/profile/Matiz-Madel',
                     'google_scholar' => 'https://scholar.google.com/',
                     'knows_about' => 'Derecho Internacional, Control de Convencionalidad, Desarrollo'

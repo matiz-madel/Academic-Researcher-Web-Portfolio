@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('avatar_jpeg')->nullable();
             $table->string('avatar_gif')->nullable();
             $table->string('avatar_og')->nullable();
-            $table->string('resume_pdf')->nullable();
+            $table->json('resume_pdf')->nullable();
             $table->timestamps();
         });
     }

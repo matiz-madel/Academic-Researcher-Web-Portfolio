@@ -1,6 +1,6 @@
 {{-- PDF or Print Button --}}
 <div class="absolute top-6 left-6 flex items-center space-x-2 bg-white dark:bg-slate-800 p-1.5 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 transition-colors duration-300 print:hidden z-50">
-    @if($public_profile && $public_profile->resume_pdf)
+    @if($public_profile && $public_profile->getTranslation('resume_pdf', app()->getLocale(), false))
         <a href="{{ route('resume.download') }}"
            target="_blank"
            title="{{ __('admin.fields.download_resume') }}"
@@ -23,6 +23,8 @@
     <div class="absolute top-6 right-6 flex items-center space-x-2 bg-white dark:bg-slate-800 p-1.5 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 transition-colors duration-300 print:hidden">
         @foreach($languages as $language)
             <a href="{{ route('lang.switch', $language->code) }}"
+               hreflang="{{ $language->code }}"
+               rel="alternate"
                title="{{ __('admin.fields.change_language').' - '.$language->language_name }}"
                aria-label="Change System Language"
                class="px-2 py-1 rounded-lg text-xl transition-all duration-200 flex items-center justify-center

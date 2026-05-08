@@ -17,7 +17,8 @@ class PublicProfile extends Model
         'subtitle',
         'subtitle_variations',
         'default_message',
-        'bio'
+        'bio',
+        'resume_pdf'
     ];
 
     protected function casts(): array

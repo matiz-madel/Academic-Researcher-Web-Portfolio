@@ -14,12 +14,25 @@ class PublicProfileController extends Controller
     public function downloadResume()
     {
         $profile = PublicProfile::first();
-        if (!$profile || !$profile->resume_pdf) {
+
+        // Abort early if the profile doesn't exist at all
+        if (!$profile) {
             abort(404, __('admin.messages.resume_not_found') ?? 'Resume not found.');
         }
 
-        $fileName = "{$profile->first_name} {$profile->last_name}.pdf";
+        // Fetch the path for the current language without falling back to a default
+        $path = $profile->getTranslation('resume_pdf', app()->getLocale(), false);
 
-        return Storage::disk('public')->download($profile->resume_pdf, $fileName);
+        // Check if the localized path is null OR if the file is missing from storage
+        if (!$path || !Storage::disk('public')->exists($path)) {
+            abort(404, __('admin.messages.resume_not_found') ?? 'Resume not found.');
+        }
+
+        // Format the download name
+        $localeSuffix = strtoupper(app()->getLocale());
+        $fileName = "{$profile->first_name} {$profile->last_name} - {$localeSuffix}.pdf";
+
+        // Download using the resolved specific language $path
+        return Storage::disk('public')->download($path, $fileName);
     }
 }

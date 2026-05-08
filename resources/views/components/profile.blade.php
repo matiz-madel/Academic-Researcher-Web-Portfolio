@@ -96,7 +96,7 @@
                 @if($public_profile && ($public_profile->email || $public_profile->phone))
                     <div class="flex flex-wrap items-center mt-2 gap-3 text-sm font-medium text-slate-500 dark:text-slate-400">
                         @if($public_profile->email)
-                            <a href="mailto:{{ $public_profile->email }}" class="hover:text-blue-800 dark:hover:text-blue-400 transition-colors flex items-center gap-2">
+                            <a href="mailto:{{ $public_profile->email }}" rel="me" class="hover:text-blue-800 dark:hover:text-blue-400 transition-colors flex items-center gap-2">
                                 {{ $public_profile->email }}
                             </a>
                         @endif
@@ -107,7 +107,7 @@
 
                         @if($public_profile->phone)
                             {{-- Using the ContactLink Accessor from the PublicProfile Model --}}
-                            <a href="{{ $public_profile->contact_link }}" target="_blank" class="hover:text-blue-800 dark:hover:text-blue-400 transition-colors flex items-center gap-2">
+                            <a href="{{ $public_profile->contact_link }}" rel="me" target="_blank" class="hover:text-blue-800 dark:hover:text-blue-400 transition-colors flex items-center gap-2">
                                 {{ $public_profile->phone }}
                             </a>
                         @endif
@@ -128,9 +128,11 @@
             @if($external_links->isNotEmpty())
                 <div class="print:hidden flex flex-wrap gap-2">
                     @foreach($external_links as $link)
-                        <a href="{{ $link->url }}" target="_blank"
-                           style="background-color: {{ $link->color }}80;"
-                           class="inline-flex items-center px-4 py-2 leading-none rounded-full text-slate-900 dark:text-white text-sm font-semibold shadow-md hover:brightness-90 hover:scale-105 transition-all duration-200">
+                        <a href="{{ $link->url }}"
+                            target="_blank"
+                            rel="me"
+                            style="background-color: {{ $link->color }}80;"
+                            class="inline-flex items-center px-4 py-2 leading-none rounded-full text-slate-900 dark:text-white text-sm font-semibold shadow-md hover:brightness-90 hover:scale-105 transition-all duration-200">
                             {{ $link->label }}
                         </a>
                     @endforeach

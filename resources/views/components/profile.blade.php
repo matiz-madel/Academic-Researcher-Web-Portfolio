@@ -107,7 +107,7 @@
 
                         @if($public_profile->phone)
                             {{-- Using the ContactLink Accessor from the PublicProfile Model --}}
-                            <a href="{{ $public_profile->contact_link }}" rel="me" target="_blank" class="hover:text-blue-800 dark:hover:text-blue-400 transition-colors flex items-center gap-2">
+                            <a href="{{ $public_profile->contact_link }}" target="_blank" rel="me noopener noreferrer" class="hover:text-blue-800 dark:hover:text-blue-400 transition-colors flex items-center gap-2">
                                 {{ $public_profile->phone }}
                             </a>
                         @endif
@@ -130,7 +130,7 @@
                     @foreach($external_links as $link)
                         <a href="{{ $link->url }}"
                             target="_blank"
-                            rel="me"
+                            rel="me noopener noreferrer"
                             style="background-color: {{ $link->color }}80;"
                             class="inline-flex items-center px-4 py-2 leading-none rounded-full text-slate-900 dark:text-white text-sm font-semibold shadow-md hover:brightness-90 hover:scale-105 transition-all duration-200">
                             {{ $link->label }}

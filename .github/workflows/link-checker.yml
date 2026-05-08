@@ -28,7 +28,7 @@ jobs:
       - name: Executar Lychee
         uses: lycheeverse/lychee-action@v2
         with:
-          args: --cache --max-cache-age 1d "**/*.md" "**/*.html" "**/*.blade.php" "**/*Seeder.php" "**/seeders/*.php"
+          args: --verbose --cache --max-cache-age 1d "**/*.md" "**/*.html" "**/*.blade.php" "**/*Seeder.php" "**/seeders/*.php"
           fail: true
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}

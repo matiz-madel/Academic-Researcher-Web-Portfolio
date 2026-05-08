@@ -1,6 +1,6 @@
 # lychee.toml
 
-exclude_urls = [
+exclude = [
     "http://localhost",
     "https://localhost:8000",
     "http://127.0.0.1",
@@ -12,5 +12,3 @@ accept = [200, 429, 403]
 timeout = 20
 
 max_retries = 2
-
-exclude_mail = true

@@ -29,68 +29,67 @@
                         {{ $work->title }}
                     @endif
                 </h3>
-
-                {{-- Isolated DOI --}}
-                @if($work->doi)
-                    <div class="mt-auto mb-3">
-                        <div class="pb-4">
-                            <p class="text-xs text-slate-500 dark:text-slate-400 font-mono">
-                                <span class="font-semibold">DOI:</span> {{ $work->doi }}
-                            </p>
+                {{-- Content Wrapper with mt-auto to push everything below to the bottom evenly --}}
+                <div class="mt-auto flex flex-col">
+                    {{-- Isolated DOI --}}
+                    @if($work->doi)
+                        <div class="mt-auto mb-3">
+                            <div class="pb-4">
+                                <p class="text-xs text-slate-500 dark:text-slate-400 font-mono">
+                                    <span class="font-semibold">DOI:</span> {{ $work->doi }}
+                                </p>
+                            </div>
                         </div>
-                    </div>
-                @endif
+                    @endif
 
-                {{-- Abstract --}}
-                @if($work->abstract)
-                    <div class="mt-auto mb-3">
-                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-                            {{ $work->abstract }}
-                        </p>
-                    </div>
-                @endif
+                        {{-- Abstract --}}
+                        @if($work->abstract)
+                            <div class="mb-4">
+                                <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                                    {{ $work->abstract }}
+                                </p>
+                            </div>
+                        @endif
 
-                {{-- Keywords (using Model Accessor) --}}
-                @if(!empty($work->valid_keywords))
-                    <div class="mt-5 flex flex-wrap gap-2">
-                        @foreach($work->valid_keywords as $keyword)
-                            <span class="px-2.5 py-1 rounded-md text-slate-500 dark:text-slate-400 text-xs font-medium border border-slate-200 dark:border-slate-700">
+                        {{-- Keywords --}}
+                        @if(!empty($work->valid_keywords))
+                            <div class="mt-2 flex flex-wrap gap-2">
+                                @foreach($work->valid_keywords as $keyword)
+                                    <span class="px-2.5 py-1 rounded-md text-slate-500 dark:text-slate-400 text-xs font-medium border border-slate-200 dark:border-slate-700">
                                         {{ trim($keyword) }}
                                     </span>
-                        @endforeach
-                    </div>
-                @endif
+                                @endforeach
+                            </div>
+                        @endif
 
-                {{-- Expandable Content --}}
-                @if($work->content)
-                    <div x-data="{ open: false }" class="print:hidden mt-4">
-                        <button @click="open = !open"
-                            :aria-expanded="open.toString()"
-                            aria-controls="content-{{ $work->id }}"
-                            class="inline-flex items-center gap-1.5 text-sm font-semibold text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors focus:outline-none whitespace-nowrap">
-                            <span x-show="!open">{{ __('admin.fields.show_content')}}</span>
-                            <span x-show="open" style="display: none;">{{ __('admin.fields.hide_content') }}</span>
-                            <svg :class="{'rotate-180': open}" class="transform transition-transform duration-300 flex-shrink-0" style="width: 16px; height: 16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </button>
+                        {{-- Expandable Content --}}
+                        @if($work->content)
+                            <div x-data="{ open: false }" class="print:hidden mt-5">
+                                <button @click="open = !open"
+                                    :aria-expanded="open.toString()"
+                                    aria-controls="content-{{ $work->id }}"
+                                    class="inline-flex items-center gap-1.5 text-sm font-semibold text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors focus:outline-none whitespace-nowrap">
+                                    <span x-show="!open">{{ __('admin.fields.show_content')}}</span>
+                                    <span x-show="open" style="display: none;">{{ __('admin.fields.hide_content') }}</span>
+                                    <svg :class="{'rotate-180': open}" class="transform transition-transform duration-300 shrink-0" style="width: 16px; height: 16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </button>
 
-                        <div
-                            x-show="open"
-                            id="content-{{ $work->id }}"
-                            x-transition.opacity
-                            style="display: none;"
-                            class="mt-4 p-4 bg-slate-50 dark:bg-slate-900/50 rounded-lg text-slate-600 dark:text-slate-400 text-sm leading-relaxed prose dark:prose-invert max-w-none border border-slate-100 dark:border-slate-700/50">
-                            {!! $work->content !!}
+                            <div
+                                x-show="open"
+                                id="content-{{ $work->id }}"
+                                x-transition.opacity
+                                style="display: none;"
+                                class="mt-4 p-4 bg-slate-50 dark:bg-slate-900/50 rounded-lg text-slate-600 dark:text-slate-400 text-sm leading-relaxed prose dark:prose-invert max-w-none border border-slate-100 dark:border-slate-700/50">
+                                {!! $work->content !!}
+                            </div>
                         </div>
-                    </div>
-                @endif
+                    @endif
 
-                {{-- Spacer --}}
-                <div class="mt-4 pt-6">
-                    {{-- Attachments Downloads (using Model Accessor) --}}
+                    {{-- Attachments Downloads --}}
                     @if(!empty($work->attachments_data))
-                        <div class="print:hidden my-5 flex flex-wrap gap-3">
+                        <div class="print:hidden mt-6 pt-5 border-t border-slate-100 dark:border-slate-700/50 flex flex-wrap gap-3">
                             @foreach($work->attachments_data as $index => $data)
                                 <a href="{{ route('work.download', ['work' => $work->id, 'index' => $index]) }}"
                                    class="inline-flex items-center space-x-2 px-4 py-2 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg text-xs font-bold text-slate-700 dark:text-slate-300 hover:bg-blue-50 dark:hover:bg-slate-800 hover:text-blue-700 dark:hover:text-blue-400 hover:border-blue-200 dark:hover:border-slate-600 transition-all shadow-sm">

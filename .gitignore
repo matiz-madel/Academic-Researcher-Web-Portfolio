@@ -36,3 +36,7 @@ Thumbs.db
 /storage/app/public/*
 /storage/framework/
 !/storage/app/public/.gitignore
+
+# Sentry
+.sentryclirc
+sentry.properties

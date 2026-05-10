@@ -30,7 +30,6 @@ class Work extends Model
     {
         return [
             'type' => WorkType::class,
-            'attachments' => 'array',
             'publication_date' => 'date', // Cast automatically to Carbon
         ];
     }

@@ -113,20 +113,30 @@ find storage -type f -exec chmod 644 {} \;
 chmod -R 775 storage/app/public storage/framework storage/logs bootstrap/cache
 ```
 
-### 6. Final Optimization & Caching
+### Final Optimization & Caching
 Whenever you change the `.env` file or update the code, clear and rebuild the cache. This step guarantees peak performance and prevents the "403 Forbidden" error in the Livewire/Filament admin panel:
 ```bash
 php artisan optimize:clear
 php artisan view:clear
 php artisan optimize
 ```
-### 7. Access the Admin Panel
+### Access the Admin Panel
 Once the installation is complete, you can access the Filament admin panel by navigating to:
 ```text
 URL: https://your-domain.com/admin  (or your .env's custom path)
 Email: name@example.com             (Replace with your .env's email)
 Password: YourStrongPasswordHere    (Replace with your .env's password)
 ```
+### 🐛 Error Tracking (Sentry)
 
+This project comes with [Sentry](https://sentry.io/) pre-installed for error monitoring and debugging. 
+
+By default, Sentry is completely non-blocking and will silently remain disabled if no configuration is found. This prevents it from throwing errors or logging unnecessary events during local development or testing.
+
+**To activate Sentry in production:**
+Add your unique DSN to your production `.env` file:
+```env
+SENTRY_LARAVEL_DSN="your-sentry-dsn-url-here"
+```
 ---
 Developed by *Matiz Madel*®

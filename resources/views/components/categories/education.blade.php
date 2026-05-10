@@ -1,9 +1,9 @@
 @props(['data'])
 <section>
-    <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-6">{{ __('admin.resources.education.plural') }}</h2>
-    <div class="space-y-6">
+    <h2 id="education-heading" class="text-2xl font-bold text-slate-900 dark:text-white mb-6">{{ __('admin.resources.education.plural') }}</h2>
+    <ol class="space-y-6">
         @foreach($data as $education)
-            <div class="border-l-2 border-slate-300 dark:border-slate-700 pl-4 ml-2">
+            <li class="border-l-2 border-slate-300 dark:border-slate-700 pl-4 ml-2">
                 <h3 class="text-lg font-semibold text-slate-800 dark:text-slate-200">{{ $education->degree }}</h3>
                 <p class="text-slate-600 dark:text-slate-400">{{ $education->institution }}</p>
                 @if($education->start_date || $education->city || $education->country)
@@ -26,7 +26,7 @@
                             @endif
                     </p>
                 @endif
-            </div>
+            </li>
         @endforeach
-    </div>
+    </ol>
 </section>

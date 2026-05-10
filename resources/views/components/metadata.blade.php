@@ -4,6 +4,14 @@
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
 @endif
 
+<link rel="canonical" href="{{ config('app.url')}}" />
+@if(isset($languages) && $languages->isNotEmpty())
+    @foreach($languages as $language)
+        <link rel="alternate" hreflang="{{ $language->code }}" href="{{ url('/'. $language->code) }}">
+    @endforeach
+@endif
+<link rel="alternate" hreflang="x-default" href="{{ url('/') }}">
+
 <title>{{ $public_profile?->full_name ?? config('app.name') }} @if($metadata?->title_suffix) - {{ $metadata->title_suffix }} @endif</title>
 <meta name="description" content="{{ $metadata?->description }}">
 <meta name="author" content="{{ $public_profile?->full_name ?? config('app.name') }}">
@@ -14,12 +22,13 @@
 <meta name="theme-color" content="{{ $metadata?->theme_color ?? '#ffffff' }}">
 <meta name="robots" content="{{ $metadata?->robots ?? 'index, follow' }}">
 
+
 {{-- Safely parse fields and construct JSON-LD purely in PHP --}}
 @php
     $sameAsLinks = [];
     $metaTagsToRender = [];
 
-    // 1. Initialize the Schema.org JSON-LD object
+    // Initialize the Schema.org JSON-LD object
     $jsonLd = [
         '@context' => 'https://schema.org/',
         '@type' => 'Person',
@@ -27,7 +36,7 @@
         'url' => url()->current(),
     ];
 
-    // 2. Process metadata resolved fields (Dynamic JSON-LD & Meta Tags)
+    // Process metadata resolved fields (Dynamic JSON-LD & Meta Tags)
     if (!empty($metadata?->resolved_fields)) {
         foreach ($metadata->resolved_fields as $key => $value) {
             $content = is_array($value) ? implode(', ', $value) : $value;
@@ -48,7 +57,7 @@
         }
     }
 
-    // 3. Inject External Links
+    // Inject External Links
     if (isset($external_links) && $external_links->isNotEmpty()) {
         foreach ($external_links as $link) {
             if ($url = filter_var($link->getTranslation('url', app()->getLocale()), FILTER_VALIDATE_URL)) {
@@ -57,7 +66,7 @@
         }
     }
 
-    // 4. Map dynamic properties from other Models
+    // Map dynamic properties from other Models
     if (!empty($public_profile?->aliases)) {
         $jsonLd['alternateName'] = $public_profile->aliases;
     }

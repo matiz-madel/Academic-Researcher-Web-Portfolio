@@ -5,14 +5,14 @@
            target="_blank"
            title="{{ __('admin.fields.download_resume') }}"
            class="px-2 py-1 text-xl opacity-60 hover:opacity-100 hover:scale-110 transition-all duration-200"
-           aria-label="Download Curriculum">
+           aria-label="{{ __('admin.fields.download_resume') }}">
             📄
         </a>
     @else
         <button onclick="window.print()"
                 title="{{ __('admin.fields.print') }}"
                 class="px-2 py-1 text-xl opacity-60 hover:opacity-100 hover:scale-110 transition-all duration-200"
-                aria-label="Print Page">
+                aria-label="{{ __('admin.fields.print') }}">
             🖨️
         </button>
     @endif
@@ -20,7 +20,7 @@
 
 {{-- Language Switcher --}}
 @if($languages->isNotEmpty())
-    <div class="absolute top-6 right-6 flex items-center space-x-2 bg-white dark:bg-slate-800 p-1.5 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 transition-colors duration-300 print:hidden">
+    <nav aria-label="{{ __('admin.fields.language_selection') }}" class="absolute top-6 right-6 flex items-center space-x-2 bg-white dark:bg-slate-800 p-1.5 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 transition-colors duration-300 print:hidden">
         @foreach($languages as $language)
             <a href="{{ route('lang.switch', $language->code) }}"
                hreflang="{{ $language->code }}"
@@ -32,6 +32,6 @@
                 {{ $language->flag }}
             </a>
         @endforeach
-    </div>
+    </nav>
 @endif
 

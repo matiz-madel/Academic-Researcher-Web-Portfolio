@@ -41,11 +41,18 @@
                 </div>
 
                 <template x-teleport="body">
-                    <div x-show="modalOpen" x-cloak style="display: none;" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4" x-transition.opacity>
+                    <div x-show="modalOpen"
+                         x-cloak style="display: none;"
+                         x-transition.opacity
+                         role="dialog"
+                         aria-modal="true"
+                         aria-label="{{ __('admin.fields.profile_picture') }}"
+                         class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4">
                         <div class="absolute inset-0" @click="modalOpen = false"></div>
                         <div class="relative max-w-2xl w-full" x-transition>
-                            <button @click="modalOpen = false" class="absolute -top-10 right-0 text-white text-4xl hover:text-gray-300">&times;</button>
-
+                            <button @click="modalOpen = false"
+                                    aria-label="{{ __('admin.actions.close') }}"
+                                    class="absolute -top-10 right-0 text-white text-4xl hover:text-gray-300">&times;</button>
                             <div class="relative w-full aspect-square md:aspect-auto group">
                                 {{-- Modal Static Avatar OR Gray Fallback --}}
                                 @if($public_profile?->has_avatar)

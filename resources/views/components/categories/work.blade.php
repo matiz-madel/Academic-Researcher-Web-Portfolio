@@ -1,9 +1,9 @@
 @props(['data'])
 <section>
-    <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-6">{{ __('admin.resources.work.plural') }}</h2>
+    <h2 id="work-heading" class="text-2xl font-bold text-slate-900 dark:text-white mb-6">{{ __('admin.resources.work.plural') }}</h2>
     <div class="space-y-6">
         @foreach($data as $work)
-            <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm flex flex-col h-full">
+            <article class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm flex flex-col h-full">
 
                 {{-- Publication Header (Type and Date) --}}
                 <div class="flex items-center space-x-2 mb-3">
@@ -65,19 +65,22 @@
                 @if($work->content)
                     <div x-data="{ open: false }" class="print:hidden mt-4">
                         <button @click="open = !open"
-                                class="inline-flex items-center gap-1.5 text-sm font-semibold text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors focus:outline-none whitespace-nowrap">
+                            :aria-expanded="open.toString()"
+                            aria-controls="content-{{ $work->id }}"
+                            class="inline-flex items-center gap-1.5 text-sm font-semibold text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors focus:outline-none whitespace-nowrap">
                             <span x-show="!open">{{ __('admin.fields.show_content')}}</span>
                             <span x-show="open" style="display: none;">{{ __('admin.fields.hide_content') }}</span>
-
                             <svg :class="{'rotate-180': open}" class="transform transition-transform duration-300 flex-shrink-0" style="width: 16px; height: 16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
                             </svg>
                         </button>
 
-                        <div x-show="open"
-                             x-transition.opacity
-                             style="display: none;"
-                             class="mt-4 p-4 bg-slate-50 dark:bg-slate-900/50 rounded-lg text-slate-600 dark:text-slate-400 text-sm leading-relaxed prose dark:prose-invert max-w-none border border-slate-100 dark:border-slate-700/50">
+                        <div
+                            x-show="open"
+                            id="content-{{ $work->id }}"
+                            x-transition.opacity
+                            style="display: none;"
+                            class="mt-4 p-4 bg-slate-50 dark:bg-slate-900/50 rounded-lg text-slate-600 dark:text-slate-400 text-sm leading-relaxed prose dark:prose-invert max-w-none border border-slate-100 dark:border-slate-700/50">
                             {!! $work->content !!}
                         </div>
                     </div>
@@ -98,7 +101,7 @@
                         </div>
                     @endif
                 </div>
-            </div>
+            </article>
         @endforeach
     </div>
 </section>

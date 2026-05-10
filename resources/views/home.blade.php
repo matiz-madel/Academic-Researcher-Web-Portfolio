@@ -18,13 +18,13 @@
 {{-- Top Actions (PDF & Language) --}}
 @include('components.top-actions')
 
-<div class="max-w-3xl mx-auto py-30 px-6">
+<main class="max-w-3xl mx-auto py-30 px-6">
     {{-- PublicProfile Header --}}
     @include('components.profile')
 
     {{-- Categories Sections --}}
     @include('components.categories')
-</div>
+</main>
 
 <script>
     function themeHandler() {

@@ -4,7 +4,7 @@ exclude = [
     "http://localhost",
     "https://localhost:8000",
     "http://127.0.0.1",
-    "https://domain.com,
+    "https://domain.com",
     '(.*linkedin\.com.*)'
 ]
 

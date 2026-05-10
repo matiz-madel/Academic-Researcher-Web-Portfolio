@@ -9,6 +9,7 @@ return [
         'dissertation-thesis' => 'Tese / Dissertação',
         'preprint' => 'Preprint',
         'working-paper' => 'Documento de Trabalho / Working Paper',
+        'software' => 'Software',
         'other' => 'Outro',
     ],
     'activity_type' => [

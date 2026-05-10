@@ -9,6 +9,7 @@ return [
         'dissertation-thesis' => 'Dissertation / Thesis',
         'preprint' => 'Preprint',
         'working-paper' => 'Working Paper',
+        'software' => 'Software',
         'other' => 'Other',
     ],
     'activity_type' => [

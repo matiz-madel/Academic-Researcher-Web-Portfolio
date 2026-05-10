@@ -14,6 +14,7 @@ enum WorkType: string implements HasLabel
     case DissertationThesis = 'dissertation-thesis';
     case Preprint = 'preprint';
     case WorkingPaper = 'working-paper';
+    case Software = 'software';
     case Other = 'other';
 
     public function getLabel(): ?string

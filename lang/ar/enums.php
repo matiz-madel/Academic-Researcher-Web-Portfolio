@@ -9,6 +9,7 @@ return [
         'dissertation-thesis' => 'أطروحة / رسالة جامعية',
         'preprint' => 'مسودة ما قبل الطباعة',
         'working-paper' => 'ورقة عمل',
+        'software' => 'برمجيات',
         'other' => 'أخرى',
     ],
     'activity_type' => [

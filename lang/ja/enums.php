@@ -9,6 +9,7 @@ return [
         'dissertation-thesis' => '学位論文 / 博士論文',
         'preprint' => 'プレプリント',
         'working-paper' => 'ワーキングペーパー',
+        'software' => 'ソフトウェア',
         'other' => 'その他',
     ],
     'activity_type' => [

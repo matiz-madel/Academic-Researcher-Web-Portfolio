@@ -52,7 +52,7 @@ class LayoutSectionsWidget extends TableWidget
                         $adminPath = config('app.admin_path', 'admin');
                         $routes = [
                             'works'       => "/{$adminPath}/works",
-                            'educations'  => "/{$adminPath}/educations",
+                            'educations'  => "/{$adminPath}/education",
                             'employments' => "/{$adminPath}/employments",
                             'activities'  => "/{$adminPath}/professional-activities",
                             'fundings'    => "/{$adminPath}/fundings",

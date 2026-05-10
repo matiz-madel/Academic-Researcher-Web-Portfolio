@@ -10,6 +10,12 @@ use App\Http\Controllers\ExternalLinkController;
 // Home Orchestrator (The ONLY view rendered)
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+Route::get('/sitemap.xml', function () {
+    return response()
+        ->view('sitemap')
+        ->header('Content-Type', 'application/xml');
+});
+
 // Resource Downloads (Backend Actions)
 Route::get('/download', [PublicProfileController::class, 'downloadResume'])->name('resume.download');
 Route::get('/downloads/publication/{work}/{index}', [WorkController::class, 'downloadAttachment'])->name('work.download');

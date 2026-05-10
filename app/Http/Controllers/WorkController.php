@@ -40,8 +40,7 @@ class WorkController extends Controller
         $safeTitle = Str::slug($work->title);
 
         // Calculate a 1-based index for the filename
-        $fileNumber = ((int)$index) + 1;
-        $downloadName = "{$safeTitle}-file-{$fileNumber}.{$extension}";
+        $downloadName = "{$safeTitle}.{$extension}";
 
         // 6. Force the download
         return Storage::disk('public')->download($filePath, $downloadName);

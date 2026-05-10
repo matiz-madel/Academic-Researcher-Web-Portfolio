@@ -49,6 +49,7 @@ class WorkForm
                 FileUpload::make('attachments')
                     ->label(__('admin.fields.attachments'))
                     ->multiple()
+                    ->disk('public')
                     ->directory('works-attachments')
                     ->acceptedFileTypes(['application/pdf', 'image/jpeg', 'image/png', 'image/webp', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'])
                     ->maxSize(1024000) // 1GB

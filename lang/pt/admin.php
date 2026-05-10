@@ -46,6 +46,7 @@ return [
         'section_active' => 'Seção visível no site (Contém dados)',
         'section_inactive' => 'Seção oculta (Sem dados)',
         'resume_not_found' => 'Currículo não encontrado.',
+        'file_missing' => 'Arquivo físico não encontrado no servidor.',
     ],
 
     'fields' => [

@@ -46,6 +46,7 @@ return [
         'section_active' => '网站上可见的版块（包含数据）',
         'section_inactive' => '隐藏的版块（无数据）',
         'resume_not_found' => '未找到简历。',
+        'file_missing' => '服务器上未找到物理文件。',
     ],
 
     'fields' => [

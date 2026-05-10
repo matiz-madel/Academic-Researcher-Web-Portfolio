@@ -46,6 +46,7 @@ return [
         'section_active' => 'Abschnitt auf der Website sichtbar (Enthält Daten)',
         'section_inactive' => 'Abschnitt ausgeblendet (Keine Daten)',
         'resume_not_found' => 'Lebenslauf nicht gefunden.',
+        'file_missing' => 'Physische Datei auf dem Server nicht gefunden.',
     ],
 
     'fields' => [

@@ -66,12 +66,20 @@ class Work extends Model
      */
     public function getAttachmentsDataAttribute(): array
     {
-        if (empty($this->attachments)) {
+        // Fetch attachments for the current locale safely
+        $currentAttachments = $this->getTranslation('attachments', app()->getLocale(), false);
+
+        // Decode if Laravel returns a raw JSON string
+        if (is_string($currentAttachments)) {
+            $currentAttachments = json_decode($currentAttachments, true);
+        }
+
+        if (empty($currentAttachments) || !is_array($currentAttachments)) {
             return [];
         }
 
         $formattedAttachments = [];
-        foreach ($this->attachments as $index => $path) {
+        foreach ($currentAttachments as $index => $path) {
             $formattedAttachments[$index] = [
                 'path' => $path,
                 'extension' => strtoupper(pathinfo($path, PATHINFO_EXTENSION))

@@ -54,6 +54,7 @@ return [
         'section_active' => 'Section visible sur le site (Contient des données)',
         'section_inactive' => 'Section masquée (Aucune donnée)',
         'resume_not_found' => 'Curriculum Vitae introuvable.',
+        'file_missing' => 'Fichier physique introuvable sur le serveur.',
     ],
 
     'fields' => [

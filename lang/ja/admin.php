@@ -46,6 +46,7 @@ return [
         'section_active' => 'サイトで表示中のセクション（データあり）',
         'section_inactive' => '非表示のセクション（データなし）',
         'resume_not_found' => '履歴書が見つかりません。',
+        'file_missing' => 'サーバー上に物理ファイルが見つかりません。',
     ],
 
     'fields' => [

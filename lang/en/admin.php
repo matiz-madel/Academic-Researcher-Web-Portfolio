@@ -46,6 +46,7 @@ return [
         'section_active' => 'Section visible on the site (Contains data)',
         'section_inactive' => 'Section hidden (No data)',
         'resume_not_found' => 'Resume not found.',
+        'file_missing' => 'Physical file not found on the server.',
     ],
 
     'fields' => [

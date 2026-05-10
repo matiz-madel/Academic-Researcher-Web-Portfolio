@@ -89,7 +89,7 @@
 
                     {{-- Attachments Downloads --}}
                     @if(!empty($work->attachments_data))
-                        <div class="print:hidden mt-1 pt-4 border-t border-slate-200 dark:border-slate-700 flex flex-wrap justify-end gap-3">
+                        <div class="print:hidden mt-2 pt-4 border-t border-slate-200 dark:border-slate-700 flex flex-wrap justify-end gap-3">
                             @foreach($work->attachments_data as $index => $data)
                                 <a href="{{ route('work.download', ['work' => $work->id, 'index' => $index]) }}"
                                    class="inline-flex items-center space-x-2 px-4 py-2 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg text-xs font-bold text-slate-700 dark:text-slate-300 hover:bg-blue-50 dark:hover:bg-slate-800 hover:text-blue-700 dark:hover:text-blue-400 hover:border-blue-200 dark:hover:border-slate-600 transition-all shadow-sm">

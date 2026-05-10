@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             LayoutSectionSeeder::class,
             PublicProfileSeeder::class,
             MetadataSeeder::class,
+            ExternalLinkSeeder::class,
         ]);
     }
 }

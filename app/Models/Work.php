@@ -20,6 +20,7 @@ class Work extends Model
         'keyword_3',
         'keyword_4',
         'keyword_5',
+        'attachments',
     ];
 
     /**

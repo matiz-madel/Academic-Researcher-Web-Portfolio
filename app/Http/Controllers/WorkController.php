@@ -37,7 +37,18 @@ class WorkController extends Controller
 
         // 5. Build a clean filename for the user
         $extension = pathinfo($filePath, PATHINFO_EXTENSION);
-        $safeTitle = Str::slug($work->title);
+
+        // Replace invalid characters (like ':') and any surrounding spaces with a clean dash ' - '
+        // Forbidden characters: < > : " / \ | ? * and control characters
+        $safeTitle = preg_replace('/\s*[<>:"\/\\\\|?*\x00-\x1F]+\s*/', ' - ', $work->title);
+
+        // Clean up any lingering dashes or spaces at the very beginning or end of the string
+        $safeTitle = trim($safeTitle, " -");
+
+        // Fallback in case the title consists only of invalid characters
+        if (empty($safeTitle)) {
+            $safeTitle = 'Attachment';
+        }
 
         // Calculate a 1-based index for the filename
         $downloadName = "{$safeTitle}.{$extension}";

@@ -29,8 +29,7 @@ class PublicProfileController extends Controller
         }
 
         // Format the download name
-        $localeSuffix = strtoupper(app()->getLocale());
-        $fileName = "{$profile->first_name} {$profile->last_name} - {$localeSuffix}.pdf";
+        $fileName = "{$profile->first_name} {$profile->last_name}.pdf";
 
         // Download using the resolved specific language $path
         return Storage::disk('public')->download($path, $fileName);

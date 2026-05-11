@@ -25,10 +25,10 @@ class MetadataSeeder extends Seeder
                 'es' => 'Portafolio académico de Matiz Madel. Investigadora en Derecho (UFPR) y Desarrolladora.'
             ],
             'keywords' => [
-                'pt' => 'controle de convencionalidade, Corte IDH, direitos humanos e laicidade, epistemologia jurídica, filosofia do direito UFPR, políticas públicas e acesso à informação, ética e pesquisa jurídica',
-                'en' => 'conventionality control, human rights, international law research, legal philosophy and epistemology, public policies and ethics, UFPR legal research, access to information law',
-                'fr' => 'contrôle de conventionnalité, droits de l\'homme, recherche juridique Brésil France, philosophie du droit et épistémologie, laïcité et politiques publiques, éthique et droit',
-                'es' => 'control de convencionalidad, sistema interamericano, derechos humanos y laicidad, filosofía del derecho y epistemología, investigación jurídica UFPR, políticas públicas y acceso a la información, ética legal'
+                'pt' => explode(', ', 'controle de convencionalidade, Corte IDH, direitos humanos e laicidade, epistemologia jurídica, filosofia do direito UFPR, políticas públicas e acesso à informação, ética e pesquisa jurídica'),
+                'en' => explode(', ', 'conventionality control, human rights, international law research, legal philosophy and epistemology, public policies and ethics, UFPR legal research, access to information law'),
+                'fr' => explode(', ', 'contrôle de conventionnalité, droits de l\'homme, recherche juridique Brésil France, philosophie du droit et épistémologie, laïcité et politiques publiques, éthique et droit'),
+                'es' => explode(', ', 'control de convencionalidad, sistema interamericano, derechos humanos y laicidad, filosofía del derecho y epistemología, investigación jurídica UFPR, políticas públicas y acceso a la información, ética legal')
             ],
             'theme_color' => '#0090d9',
             'robots' => 'index, follow',

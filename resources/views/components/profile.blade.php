@@ -142,7 +142,7 @@
             --brand-color: {{ $link->color }};
             color: color-mix(in srgb, var(--brand-color), canvasText 20%);
             border-color: color-mix(in srgb, var(--brand-color), canvasText 15%);
-            background-color: color-mix(in srgb, var(--brand-color), transparent 95%);
+            background-color: color-mix(in srgb, white, transparent 60%);
         "
                            class="inline-flex items-center px-4 py-2 leading-none rounded-full border bg-transparent text-sm font-semibold transition-all duration-300 hover:brightness-110 hover:bg-[color-mix(in_srgb,var(--brand-color),transparent_90%)] hover:-translate-y-0.5">
                             {{ $link->label }}

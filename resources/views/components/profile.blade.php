@@ -141,10 +141,11 @@
                            style="
             color: color-mix(in srgb, {{ $link->color }}, canvasText 25%);
             border-color: currentColor;
-            box-shadow: 4px 4px 0px canvasText;
         "
-                           class="inline-flex items-center px-4 py-2 leading-none rounded-full border-2 bg-transparent text-sm font-bold transition-all duration-200 hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[6px_6px_0px_canvasText]">
-                            {{ $link->label }}
+                           class="inline-flex items-center px-4 py-2 leading-none rounded-full border-2 bg-transparent text-sm font-bold transition-all duration-200
+               shadow-[4px_4px_0px_black] dark:shadow-[4px_4px_0px_white]
+               hover:translate-x-[-2px] hover:translate-y-[-2px]
+               hover:shadow-[6px_6px_0px_black] dark:hover:shadow-[6px_6px_0px_white]">{{ $link->label }}
                         </a>
                     @endforeach
                 </div>

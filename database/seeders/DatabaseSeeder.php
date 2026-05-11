@@ -31,6 +31,7 @@ class DatabaseSeeder extends Seeder
             EducationSeeder::class,
             EmploymentSeeder::class,
             FundingSeeder::class,
+            WorkSeeder::class,
         ]);
     }
 }

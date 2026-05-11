@@ -139,8 +139,8 @@
                             target="_blank"
                             rel="me noopener noreferrer"
                            style="
-                               color: color-mix(in srgb, {{ $link->color }}, canvasText 15%);
-                               border-color: color-mix(in srgb, {{ $link->color }}, canvasText 15%);
+                               color: color-mix(in srgb, {{ $link->color }}, currentColor 15%);
+                               border-color: color-mix(in srgb, {{ $link->color }}, currentColor 15%);
                            "
                            class="inline-flex items-center px-4 py-2 leading-none rounded-full border-2 bg-transparent text-sm font-bold hover:scale-105 transition-all duration-200">
                             {{ $link->label }}

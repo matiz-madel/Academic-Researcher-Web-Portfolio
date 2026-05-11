@@ -138,7 +138,7 @@
                         <a href="{{ $link->url }}"
                             target="_blank"
                             rel="me noopener noreferrer"
-                            style="background: linear-gradient(to top, color-mix(in srgb, {{ $link->color }} 35%, transparent), transparent);"
+                            style="background: linear-gradient(to top, color-mix(in srgb, {{ $link->color }} 65%, transparent), transparent);"
                             class="inline-flex items-center px-4 py-2 leading-none rounded-full border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white text-sm font-bold hover:scale-105 transition-all duration-200">
                             {{ $link->label }}
                         </a>

@@ -139,10 +139,11 @@
                             target="_blank"
                             rel="me noopener noreferrer"
                            style="
-                               color: color-mix(in srgb, {{ $link->color }}, currentColor 30%);
-                               border-color: color-mix(in srgb, {{ $link->color }}, currentColor 30%);
-                           "
-                           class="inline-flex items-center px-4 py-2 leading-none rounded-full border-2 bg-transparent text-sm font-bold hover:scale-105 transition-all duration-200">
+            color: color-mix(in srgb, {{ $link->color }}, canvasText 25%);
+            border-color: currentColor;
+            box-shadow: 4px 4px 0px canvasText;
+        "
+                           class="inline-flex items-center px-4 py-2 leading-none rounded-full border-2 bg-transparent text-sm font-bold transition-all duration-200 hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[6px_6px_0px_canvasText]">
                             {{ $link->label }}
                         </a>
                     @endforeach

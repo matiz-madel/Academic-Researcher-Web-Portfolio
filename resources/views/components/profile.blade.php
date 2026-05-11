@@ -138,8 +138,13 @@
                         <a href="{{ $link->url }}"
                             target="_blank"
                             rel="me noopener noreferrer"
-                            style="color: color-mix(in srgb, {{ $link->color }}, canvasText 20%); border-color: currentColor;"
-                            class="inline-flex items-center px-4 py-2 leading-none rounded-full border bg-transparent text-sm font-semibold transition-all duration-300 hover:-translate-y-0.5 hover:shadow-sm hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                           style="
+            --brand-color: {{ $link->color }};
+            color: color-mix(in srgb, var(--brand-color), canvasText 20%);
+            border-color: color-mix(in srgb, var(--brand-color), canvasText 15%);
+            background-color: color-mix(in srgb, var(--brand-color), transparent 95%);
+        "
+                           class="inline-flex items-center px-4 py-2 leading-none rounded-full border bg-transparent text-sm font-semibold transition-all duration-300 hover:brightness-110 hover:bg-[color-mix(in_srgb,var(--brand-color),transparent_90%)] hover:-translate-y-0.5">
                             {{ $link->label }}
                         </a>
                     @endforeach

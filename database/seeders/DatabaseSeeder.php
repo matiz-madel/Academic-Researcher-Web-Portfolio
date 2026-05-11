@@ -14,7 +14,8 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         User::updateOrCreate(
-            ['email' => config('app.admin_email'),
+            [
+                'email' => config('app.admin_email'),
                 'name' => config('app.admin_name'),
                 'password' => Hash::make(config('app.admin_password')),
             ]
@@ -26,6 +27,10 @@ class DatabaseSeeder extends Seeder
             PublicProfileSeeder::class,
             MetadataSeeder::class,
             ExternalLinkSeeder::class,
+            ProfessionalActivitySeeder::class,
+            EducationSeeder::class,
+            EmploymentSeeder::class,
+            FundingSeeder::class,
         ]);
     }
 }

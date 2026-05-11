@@ -138,20 +138,13 @@
                         <a href="{{ $link->url }}"
                             target="_blank"
                             rel="me noopener noreferrer"
-                           class="group inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-sm font-semibold text-slate-700 dark:text-slate-200 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-sm dark:hover:bg-slate-800">
-
-                            {{-- O "Ponto de Arte" (Gallery Dot) --}}
+                            class="group inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-sm font-semibold text-slate-700 dark:text-slate-200 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-sm dark:hover:bg-slate-800">
                             <span class="relative flex h-2.5 w-2.5 shrink-0">
-                                {{-- Brilho sutil que aparece apenas ao passar o mouse (Efeito Premium) --}}
                                 <span class="absolute inline-flex h-full w-full rounded-full opacity-0 group-hover:opacity-50 transition-opacity duration-300"
                                       style="background-color: {{ $link->color }}; filter: blur(3px);"></span>
-
-                                {{-- O ponto de cor principal com o "ring" de segurança para contraste --}}
                                 <span class="relative inline-flex rounded-full h-2.5 w-2.5 ring-1 ring-inset ring-slate-900/10 dark:ring-white/20"
                                       style="background-color: {{ $link->color }};"></span>
                             </span>
-
-                            {{-- O Texto --}}
                             <span>{{ $link->label }}</span>
                         </a>
                     @endforeach

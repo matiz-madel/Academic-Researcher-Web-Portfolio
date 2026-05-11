@@ -3,7 +3,7 @@
     <h2 id="education-heading" class="text-2xl font-bold text-slate-900 dark:text-white mb-6">{{ __('admin.resources.education.plural') }}</h2>
     <ol class="space-y-6">
         @foreach($data as $education)
-            <li class="border-l-2 border-slate-300 dark:border-slate-700 pl-4 ml-2">
+            <li class="border-l border-slate-200 dark:border-slate-800 pl-5 ml-2 transition-all duration-300 hover:border-slate-400 dark:hover:border-slate-500">
                 <h3 class="text-lg font-semibold text-slate-800 dark:text-slate-200">{{ $education->degree }}</h3>
                 <p class="text-slate-600 dark:text-slate-400">{{ $education->institution }}</p>
                 @if($education->start_date || $education->city || $education->country)

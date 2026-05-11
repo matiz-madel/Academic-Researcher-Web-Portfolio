@@ -7,7 +7,7 @@
 
                 {{-- Publication Header (Type and Date) --}}
                 <div class="flex items-center space-x-2 mb-3">
-                            <span class="px-2.5 py-0.5 rounded-md bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 text-xs font-semibold tracking-wide uppercase">
+                            <span class="px-3 py-1 rounded-full border border-slate-300 dark:border-slate-600 bg-transparent text-slate-600 dark:text-slate-400 text-[10px] font-bold tracking-widest uppercase">
                                 {{ $work->type?->getLabel() }}
                             </span>
                     @if($work->publication_date)

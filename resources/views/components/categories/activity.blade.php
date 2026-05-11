@@ -3,7 +3,7 @@
     <h2 id="activity-heading" class="text-2xl font-bold text-slate-900 dark:text-white mb-6">{{ __('admin.resources.professional_activity.plural') }}</h2>
     <ol class="space-y-6">
         @foreach($data as $activity)
-            <li class="border-l-2 border-slate-300 dark:border-slate-700 pl-4 ml-2">
+            <li class="border-l border-slate-200 dark:border-slate-800 pl-5 ml-2 transition-all duration-300 hover:border-slate-400 dark:hover:border-slate-500">
                 <div class="flex items-center space-x-2 mb-1">
                     <span class="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide">{{ $activity->activity_type?->getLabel() }}</span>
                 </div>

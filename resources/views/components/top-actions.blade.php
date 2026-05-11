@@ -27,9 +27,9 @@
                rel="alternate"
                title="{{ __('admin.fields.change_language').' - '.$language->language_name }}"
                aria-label="Change System Language"
-               class="px-2 py-1 rounded-lg text-xl transition-all duration-200 flex items-center justify-center
-                      {{ app()->getLocale() === $language->code ? 'bg-slate-100 scale-110 shadow-sm opacity-100' : 'hover:bg-slate-50 hover:scale-110 opacity-50 hover:opacity-100 grayscale-50 hover:grayscale-0' }}" >
-                {{ $language->flag }}
+               class="w-8 h-8 rounded-full text-xs font-bold transition-all duration-300 flex items-center justify-center
+                    {{ app()->getLocale() === $language->code ? 'bg-slate-800 dark:bg-slate-200 text-white dark:text-slate-900 shadow-md' : 'text-slate-500 hover:bg-slate-200 dark:hover:bg-slate-800' }}" >
+               {{ $language->flag }}
             </a>
         @endforeach
     </nav>

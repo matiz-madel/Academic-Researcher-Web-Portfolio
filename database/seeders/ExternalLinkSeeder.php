@@ -92,6 +92,16 @@ class ExternalLinkSeeder extends Seeder
                 'description' => '{"en": "View my Duolingo profile", "es": "Ver mi perfil en Duolingo", "fr": "Voir mon profil Duolingo", "pt": "Ver meu perfil no Duolingo"}',
                 'created_at' => '2026-05-06 13:46:04',
                 'updated_at' => '2026-05-10 02:12:38'
+            ],
+            [
+            'id' => 9,
+            'label' => '{"en": "Pinterest", "es": "Pinterest", "fr": "Pinterest", "pt": "Pinterest"}',
+            'url' => '{"en": "https://pinterest.com/matizmadel", "es": "https://pinterest.com/matizmadel", "fr": "https://pinterest.com/matizmadel", "pt": "https://pinterest.com/matizmadel"}',
+            'color' => '#E60023',
+            'sort' => 9,
+            'description' => '{"en": "View Pinterest", "es": "Ver Pinterest", "fr": "Voir Pinterest", "pt": "Ver Pinterest"}',
+            'created_at' => '2026-05-06 13:46:04',
+            'updated_at' => '2026-05-10 02:12:38'
             ]
         ]);
     }

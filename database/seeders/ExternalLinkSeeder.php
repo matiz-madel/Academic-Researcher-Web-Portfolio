@@ -12,7 +12,7 @@ class ExternalLinkSeeder extends Seeder
      */
     public function run(): void
     {
-        $external_links = [
+        DB::table('external_links')->insert([
             [
                 'id' => 1,
                 'label' => '{"en": "ORCID", "es": "ORCID", "fr": "ORCID", "pt": "ORCID"}',
@@ -93,8 +93,6 @@ class ExternalLinkSeeder extends Seeder
                 'created_at' => '2026-05-06 13:46:04',
                 'updated_at' => '2026-05-10 02:12:38'
             ]
-        ];
-
-        DB::table('external_links')->insert($external_links);
+        ]);
     }
 }

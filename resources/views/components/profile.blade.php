@@ -139,7 +139,7 @@
                             target="_blank"
                             rel="me noopener noreferrer"
                             style="border-color: {{ $link->color }};"
-                            class="inline-flex items-center px-4 py-2 leading-none rounded-full border-2 bg-transparent text-slate-900 dark:text-white text-sm font-semibold hover:bg-slate-50 dark:hover:bg-slate-800 hover:scale-105 transition-all duration-200">
+                            class="inline-flex items-center px-4 py-2 leading-none rounded-full border bg-transparent text-slate-900 dark:text-white text-sm font-semibold hover:bg-slate-50 dark:hover:bg-slate-800 hover:scale-105 transition-all duration-200">
                             {{ $link->label }}
                         </a>
                     @endforeach

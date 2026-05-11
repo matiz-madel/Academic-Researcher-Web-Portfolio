@@ -35,7 +35,7 @@
                title="{{ __('admin.fields.change_language').' - '.$language->language_name }}"
                aria-label="Change System Language"
                class="relative flex items-center justify-center w-9 h-9 rounded-full text-xl transition-all duration-300
-                      {{ $isActiveLocale ? 'bg-white dark:bg-slate-800 shadow-sm ring-1 ring-slate-200 dark:ring-slate-700' : 'opacity-40 hover:opacity-100 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 grayscale hover:grayscale-0' }}">
+                      {{ $isActiveLocale ? 'bg-white dark:bg-slate-800 shadow-sm ring-1 ring-slate-200 dark:ring-slate-700' : 'opacity-40 hover:opacity-100 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 grayscale-25 hover:grayscale-0' }}">
 
                 {{--
                     Container for the flag.

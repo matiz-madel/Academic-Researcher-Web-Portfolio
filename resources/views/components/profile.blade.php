@@ -138,8 +138,8 @@
                         <a href="{{ $link->url }}"
                             target="_blank"
                             rel="me noopener noreferrer"
-                            style="--link-color: {{ $link->color }};"
-                            class="inline-flex items-center px-4 py-2 leading-none rounded-full border border-slate-200 dark:border-slate-700 bg-transparent text-sm font-bold hover:scale-105 transition-all duration-200 text-[color-mix(in_srgb,var(--link-color),black_20%)] dark:text-[color-mix(in_srgb,var(--link-color),white_40%)]">
+                            style="color: {{ $link->color }};"
+                            class="inline-flex items-center px-4 py-2 leading-none rounded-full border border-slate-200 dark:border-slate-700 bg-transparent text-sm font-bold hover:scale-105 transition-all duration-200 brightness-90 dark:brightness-125 dark:saturate-50">
                             {{ $link->label }}
                         </a>
                     @endforeach

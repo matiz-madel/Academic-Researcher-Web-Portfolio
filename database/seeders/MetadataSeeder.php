@@ -19,10 +19,10 @@ class MetadataSeeder extends Seeder
                 'es' => 'Portafolio Académico',
             ],
             'description' => [
-                'pt' => 'Portfólio acadêmico de Matiz Madel. Pesquisadora em Direito (UFPR) e Desenvolvedora. Foco em Direito constitucional, direitos humanos, filosofia do direito e políticas públicas.',
-                'en' => 'Academic portfolio of Matiz Madel. Law Researcher (UFPR) and Developer. Focused on constitutional law, human rights, philosophy of law, and public policies.',
-                'fr' => 'Portfolio académique de Matiz Madel. Chercheuse en Droit (UFPR) et Développeuse. Droit constitutionnel, droits de l\'homme, philosophie du droit et politiques publiques.',
-                'es' => 'Portafolio académico de Matiz Madel. Investigadora en Derecho (UFPR) y Desarrolladora. Derecho constitucional, derechos humanos, filosofía del derecho y políticas públicas.'
+                'pt' => 'Portfólio acadêmico de Matiz Madel. Pesquisadora em Direito (UFPR) e Desenvolvedora.',
+                'en' => 'Academic portfolio of Matiz Madel. Law Researcher (UFPR) and Developer.',
+                'fr' => 'Portfolio académique de Matiz Madel. Chercheuse en Droit (UFPR) et Développeuse.',
+                'es' => 'Portafolio académico de Matiz Madel. Investigadora en Derecho (UFPR) y Desarrolladora.'
             ],
             'keywords' => [
                 'pt' => 'controle de convencionalidade, Corte IDH, direitos humanos e laicidade, epistemologia jurídica, filosofia do direito UFPR, políticas públicas e acesso à informação, ética e pesquisa jurídica',

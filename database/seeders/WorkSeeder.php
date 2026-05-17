@@ -40,7 +40,7 @@ class WorkSeeder extends Seeder
                 'keyword_3' => '{"en": "Public Policies", "es": "Políticas Públicas", "fr": "Politiques Publiques", "pt": "Políticas Públicas"}',
                 'keyword_4' => '{"en": "Constitutional Law", "es": "Derecho Constitucional", "fr": "Droit Constitutionnel", "pt": "Direito Constitucional"}',
                 'keyword_5' => '{"en": "Congress", "es": "Congreso", "fr": "Congrès", "pt": "Congresso"}',
-                'attachments' => '{"en": ["https://matiz.me/downloads/publication/1/0"], "es": ["https://matiz.me/downloads/publication/1/0"], "fr": ["https://matiz.me/downloads/publication/1/0"], "pt": ["https://matiz.me/downloads/publication/1/0"]}',
+                'attachments' => null,
             ],
             [
                 'id' => 3,

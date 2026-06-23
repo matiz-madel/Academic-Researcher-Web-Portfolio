@@ -7048,16 +7048,16 @@
         },
         {
             "name": "symfony/http-foundation",
-            "version": "v8.0.8",
+            "version": "v8.0.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-foundation.git",
-                "reference": "02656f7ebeae5c155d659e946f6b3a33df24051b"
+                "reference": "30459bd82094c2572f3f78c04132e92f257a5f76"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/02656f7ebeae5c155d659e946f6b3a33df24051b",
-                "reference": "02656f7ebeae5c155d659e946f6b3a33df24051b",
+                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/30459bd82094c2572f3f78c04132e92f257a5f76",
+                "reference": "30459bd82094c2572f3f78c04132e92f257a5f76",
                 "shasum": ""
             },
             "require": {
@@ -7104,7 +7104,7 @@
             "description": "Defines an object-oriented layer for the HTTP specification",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/http-foundation/tree/v8.0.8"
+                "source": "https://github.com/symfony/http-foundation/tree/v8.0.13"
             },
             "funding": [
                 {
@@ -7124,20 +7124,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-03-30T15:14:47+00:00"
+            "time": "2026-05-24T11:21:57+00:00"
         },
         {
             "name": "symfony/http-kernel",
-            "version": "v8.0.8",
+            "version": "v8.0.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-kernel.git",
-                "reference": "1770f6818d83b2fddc12185025b93f39a90cb628"
+                "reference": "0f2b114380b21d8736a496ab4672b012e3822ee7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/1770f6818d83b2fddc12185025b93f39a90cb628",
-                "reference": "1770f6818d83b2fddc12185025b93f39a90cb628",
+                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/0f2b114380b21d8736a496ab4672b012e3822ee7",
+                "reference": "0f2b114380b21d8736a496ab4672b012e3822ee7",
                 "shasum": ""
             },
             "require": {
@@ -7208,7 +7208,7 @@
             "description": "Provides a structured process for converting a Request into a Response",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/http-kernel/tree/v8.0.8"
+                "source": "https://github.com/symfony/http-kernel/tree/v8.0.13"
             },
             "funding": [
                 {
@@ -7228,7 +7228,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-03-31T21:14:05+00:00"
+            "time": "2026-05-27T08:48:59+00:00"
         },
         {
             "name": "symfony/mailer",
@@ -7469,7 +7469,7 @@
         },
         {
             "name": "symfony/polyfill-ctype",
-            "version": "v1.36.0",
+            "version": "v1.37.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-ctype.git",
@@ -7528,7 +7528,7 @@
                 "portable"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-ctype/tree/v1.36.0"
+                "source": "https://github.com/symfony/polyfill-ctype/tree/v1.37.0"
             },
             "funding": [
                 {
@@ -8055,16 +8055,16 @@
         },
         {
             "name": "symfony/polyfill-php85",
-            "version": "v1.36.0",
+            "version": "v1.38.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php85.git",
-                "reference": "2c408a6bb0313e6001a83628dc5506100474254e"
+                "reference": "ba2ba04f3352cfa2dcbbcb90aee13ed967f505b1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php85/zipball/2c408a6bb0313e6001a83628dc5506100474254e",
-                "reference": "2c408a6bb0313e6001a83628dc5506100474254e",
+                "url": "https://api.github.com/repos/symfony/polyfill-php85/zipball/ba2ba04f3352cfa2dcbbcb90aee13ed967f505b1",
+                "reference": "ba2ba04f3352cfa2dcbbcb90aee13ed967f505b1",
                 "shasum": ""
             },
             "require": {
@@ -8111,7 +8111,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-php85/tree/v1.36.0"
+                "source": "https://github.com/symfony/polyfill-php85/tree/v1.38.1"
             },
             "funding": [
                 {
@@ -8131,7 +8131,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-04-10T16:50:15+00:00"
+            "time": "2026-05-26T02:25:22+00:00"
         },
         {
             "name": "symfony/polyfill-uuid",

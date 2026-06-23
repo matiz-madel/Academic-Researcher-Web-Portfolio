@@ -61,7 +61,7 @@ return [
         // ----------------------
 
         'attachments' => 'المرفقات',
-        'avatar_gif' => 'صورة شخصية متحركة (GIF)',
+        'avatar_animated' => 'صورة شخصية متحركة',
         'avatar_jpeg' => 'صورة شخصية (JPEG/PNG)',
         'avatar_og' => 'صورة المشاركة الاجتماعية (OG Image)',
         'avatar_og_helper' => 'الحجم الموصى به: 1200x630 بكسل',

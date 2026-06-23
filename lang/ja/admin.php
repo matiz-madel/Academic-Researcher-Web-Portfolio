@@ -61,7 +61,7 @@ return [
         // ----------------------
 
         'attachments' => '添付ファイル',
-        'avatar_gif' => 'アニメーションアバター (GIF)',
+        'avatar_animated' => 'アニメーションアバター',
         'avatar_jpeg' => 'プロフィール画像 (JPEG/PNG)',
         'avatar_og' => 'ソーシャルシェア画像 (OG Image)',
         'avatar_og_helper' => '推奨サイズ: 1200x630px',

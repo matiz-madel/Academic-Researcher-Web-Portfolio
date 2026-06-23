@@ -93,12 +93,12 @@ class PublicProfile extends Model
     }
 
     /**
-     * Check if the profile has a valid GIF avatar assigned.
+     * Check if the profile has a valid video avatar assigned.
      * This encapsulates the logic into the Model, keeping the View clean.
      */
-    public function getHasGifAttribute(): bool
+    public function getHasVideoAttribute(): bool
     {
-        return !empty($this->avatar_gif);
+        return !empty($this->avatar_animated);
     }
 
 }

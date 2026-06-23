@@ -20,10 +20,10 @@ class FundingForm
                     ->label(__('admin.fields.funding_type')),
                 TextInput::make('title')
                     ->label(__('admin.fields.title'))
-                    ->required(),
+                    ->required(fn ($livewire) => !property_exists($livewire, 'activeLocale') || $livewire->activeLocale === \App\Models\Language::getDefaultLocale()),
                 TextInput::make('agency')
                     ->label(__('admin.fields.agency'))
-                    ->required(),
+                    ->required(fn ($livewire) => !property_exists($livewire, 'activeLocale') || $livewire->activeLocale === \App\Models\Language::getDefaultLocale()),
                 DatePicker::make('start_date')
                     ->label(__('admin.fields.start_date')),
                 DatePicker::make('end_date')

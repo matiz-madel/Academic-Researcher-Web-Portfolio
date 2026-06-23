@@ -23,8 +23,8 @@ class PublicProfileTable
                 TextColumn::make('avatar_jpeg')
                     ->label(__('admin.fields.avatar_jpeg'))
                     ->searchable(),
-                TextColumn::make('avatar_gif')
-                    ->label(__('admin.fields.avatar_gif'))
+                TextColumn::make('avatar_animated')
+                    ->label(__('admin.fields.avatar_animated'))
                     ->searchable(),
                 TextColumn::make('created_at')
                     ->label(__('admin.fields.created_at'))

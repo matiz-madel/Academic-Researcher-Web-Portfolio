@@ -20,10 +20,10 @@ class ProfessionalActivityForm
                     ->required(),
                 TextInput::make('title')
                     ->label(__('admin.fields.title'))
-                    ->required(),
+                    ->required(fn ($livewire) => !property_exists($livewire, 'activeLocale') || $livewire->activeLocale === \App\Models\Language::getDefaultLocale()),
                 TextInput::make('organization')
                     ->label(__('admin.fields.organization'))
-                    ->required(),
+                    ->required(fn ($livewire) => !property_exists($livewire, 'activeLocale') || $livewire->activeLocale === \App\Models\Language::getDefaultLocale()),
                 DatePicker::make('start_date')
                     ->label(__('admin.fields.start_date')),
                 DatePicker::make('end_date')

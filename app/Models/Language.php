@@ -15,10 +15,23 @@ class Language extends Model
     {
         static::saved(function () {
             Cache::forget('site_languages_models');
+            Cache::forget('default_active_locale');
         });
 
         static::deleted(function () {
             Cache::forget('site_languages_models');
+            Cache::forget('default_active_locale');
+        });
+    }
+
+    /**
+     * Get the code of the default (primary) active language.
+     * Uses cache for performance since this is called frequently in forms.
+     */
+    public static function getDefaultLocale(): string
+    {
+        return \Illuminate\Support\Facades\Cache::rememberForever('default_active_locale', function () {
+            return self::where('is_active', true)->orderBy('sort')->value('code') ?? 'fr';
         });
     }
 }

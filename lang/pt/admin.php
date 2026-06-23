@@ -61,7 +61,7 @@ return [
         // ----------------------
 
         'attachments' => 'Anexos',
-        'avatar_gif' => 'Avatar animado (GIF)',
+        'avatar_animated' => 'Avatar Animado',
         'avatar_jpeg' => 'Foto de Perfil (JPEG/PNG)',
         'avatar_og' => 'Imagem de Compartilhamento (OG Image)',
         'avatar_og_helper' => 'Tamanho recomendado: 1200x630px',

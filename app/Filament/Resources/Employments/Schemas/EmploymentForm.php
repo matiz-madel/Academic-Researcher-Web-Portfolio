@@ -14,10 +14,10 @@ class EmploymentForm
             ->components([
                 TextInput::make('organization')
                     ->label(__('admin.fields.organization'))
-                    ->required(),
+                    ->required(fn ($livewire) => !property_exists($livewire, 'activeLocale') || $livewire->activeLocale === \App\Models\Language::getDefaultLocale()),
                 TextInput::make('role')
                     ->label(__('admin.fields.role'))
-                    ->required(),
+                    ->required(fn ($livewire) => !property_exists($livewire, 'activeLocale') || $livewire->activeLocale === \App\Models\Language::getDefaultLocale()),
                 TextInput::make('department')
                     ->label(__('admin.fields.department')),
                 DatePicker::make('start_date')

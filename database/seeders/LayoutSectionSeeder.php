@@ -23,11 +23,11 @@ class LayoutSectionSeeder extends Seeder
 
         // Define the categories using their translation key identifiers
         $sectionsDefinition = [
-            ['identifier' => 'works',       'key' => 'work'],
             ['identifier' => 'educations',  'key' => 'education'],
-            ['identifier' => 'employments', 'key' => 'employment'],
             ['identifier' => 'activities',  'key' => 'professional_activity'],
             ['identifier' => 'fundings',    'key' => 'funding'],
+            ['identifier' => 'employments', 'key' => 'employment'],
+            ['identifier' => 'works',       'key' => 'work'],
         ];
 
         $sortOrder = 1;

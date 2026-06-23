@@ -22,8 +22,10 @@
                 {{-- Title --}}
                 <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-1">
                     @if($work->url)
-                        <a href="{{ $work->url }}" target="_blank" rel="noopener noreferrer" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-                            {{ $work->title }}
+                        <a href="{{ $work->url }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 hover:text-blue-600 dark:hover:text-blue-400 transition-colors group">
+                            <span>{{ $work->title }}</span>
+                            {{-- Heroicons: arrow-top-right-on-square --}}
+                            <x-heroicon-o-arrow-top-right-on-square class="w-5 h-5 text-slate-400 dark:text-slate-500 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors shrink-0" stroke-width="2" />
                         </a>
                     @else
                         {{ $work->title }}
@@ -81,8 +83,7 @@
                                 id="content-{{ $work->id }}"
                                 x-transition.opacity
                                 style="display: none;"
-                                class="mt-4 p-4 bg-slate-50 dark:bg-slate-900/50 rounded-lg text-slate-600 dark:text-slate-400 text-sm leading-relaxed prose dark:prose-invert max-w-none border border-slate-100 dark:border-slate-700/50">
-                                {!! $work->content !!}
+                                class="mt-4 p-4 bg-slate-50 dark:bg-slate-900/50 rounded-lg text-slate-600 dark:text-slate-400 text-sm leading-relaxed prose dark:prose-invert max-w-none border border-slate-100 dark:border-slate-700/50 whitespace-pre-line">{{ $work->content }}
                             </div>
                         </div>
                     @endif

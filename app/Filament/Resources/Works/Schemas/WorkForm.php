@@ -18,7 +18,7 @@ class WorkForm
             ->components([
                 TextInput::make('title')
                     ->label(__('admin.fields.title'))
-                    ->required(),
+                    ->required(fn ($livewire) => !property_exists($livewire, 'activeLocale') || $livewire->activeLocale === \App\Models\Language::getDefaultLocale()),
                 Select::make('type')
                     ->options(WorkType::class)
                     ->label(__('admin.fields.type'))

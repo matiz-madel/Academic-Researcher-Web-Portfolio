@@ -24,7 +24,7 @@ return new class extends Migration
             $table->boolean('is_whatsapp')->default(true);
             $table->json('default_message')->nullable();
             $table->string('avatar_jpeg')->nullable();
-            $table->string('avatar_gif')->nullable();
+            $table->string('avatar_animated')->nullable();
             $table->string('avatar_og')->nullable();
             $table->json('resume_pdf')->nullable();
             $table->timestamps();

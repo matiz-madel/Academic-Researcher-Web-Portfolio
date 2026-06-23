@@ -29,7 +29,7 @@ class PublicProfileForm
                     ->columnSpanFull(),
                 Textarea::make('subtitle')
                     ->label(__('admin.fields.subtitle'))
-                    ->required()
+                    ->required(fn ($livewire) => !property_exists($livewire, 'activeLocale') || $livewire->activeLocale === \App\Models\Language::getDefaultLocale())
                     ->columnSpanFull(),
                 TagsInput::make('subtitle_variations')
                     ->label(__('admin.fields.subtitle_variations'))
@@ -68,12 +68,11 @@ class PublicProfileForm
                     ->maxSize(1048576) // 1GB limit
                     ->acceptedFileTypes(['image/jpeg', 'image/jpg', 'image/png'])
                     ->directory('avatars'),
-                FileUpload::make('avatar_gif')
-                    ->label(__('admin.fields.avatar_gif'))
-                    ->image()
+                FileUpload::make('avatar_animated')
+                    ->label(__('admin.fields.avatar_animated'))
                     ->disk('public')
                     ->maxSize(1048576) // 1GB limit
-                    ->acceptedFileTypes(['image/gif'])
+                    ->acceptedFileTypes(['video/mp4', 'video/webm'])
                     ->directory('avatars'),
                 ])->columnSpanFull(),
                 FileUpload::make('resume_pdf')

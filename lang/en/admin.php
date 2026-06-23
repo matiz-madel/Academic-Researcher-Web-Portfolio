@@ -61,7 +61,7 @@ return [
         // ----------------------
 
         'attachments' => 'Attachments',
-        'avatar_gif' => 'Animated Avatar (GIF)',
+        'avatar_animated' => 'Animated Avatar',
         'avatar_jpeg' => 'Profile Picture (JPEG/PNG)',
         'avatar_og' => 'Social Share Image (OG Image)',
         'avatar_og_helper' => 'Recommended size: 1200x630px',

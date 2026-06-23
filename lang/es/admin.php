@@ -61,7 +61,7 @@ return [
         // ----------------------
 
         'attachments' => 'Archivos adjuntos',
-        'avatar_gif' => 'Avatar animado (GIF)',
+        'avatar_animated' => 'Avatar Animado',
         'avatar_jpeg' => 'Foto de perfil (JPEG/PNG)',
         'avatar_og' => 'Imagen para redes sociales (OG Image)',
         'avatar_og_helper' => 'Tamaño recomendado: 1200x630px',

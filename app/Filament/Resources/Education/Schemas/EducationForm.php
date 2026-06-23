@@ -14,10 +14,10 @@ class EducationForm
             ->components([
                 TextInput::make('institution')
                     ->label(__('admin.fields.institution'))
-                    ->required(),
+                    ->required(fn ($livewire) => !property_exists($livewire, 'activeLocale') || $livewire->activeLocale === \App\Models\Language::getDefaultLocale()),
                 TextInput::make('degree')
                     ->label(__('admin.fields.degree'))
-                    ->required(),
+                    ->required(fn ($livewire) => !property_exists($livewire, 'activeLocale') || $livewire->activeLocale === \App\Models\Language::getDefaultLocale()),
                 TextInput::make('department')
                     ->label(__('admin.fields.department')),
                 DatePicker::make('start_date')

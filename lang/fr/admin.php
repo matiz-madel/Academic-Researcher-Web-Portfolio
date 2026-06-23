@@ -69,7 +69,7 @@ return [
         // ----------------------
 
         'attachments' => 'Pièces jointes',
-        'avatar_gif' => 'Avatar animé (GIF)',
+        'avatar_animated' => 'Avatar Animé',
         'avatar_jpeg' => 'Photo de profil (JPEG/PNG)',
         'avatar_og' => 'Image de partage social (OG Image)',
         'avatar_og_helper' => 'Taille recommandée : 1200x630px',

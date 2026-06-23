@@ -61,7 +61,7 @@ return [
         // ----------------------
 
         'attachments' => '附件',
-        'avatar_gif' => '动态头像 (GIF)',
+        'avatar_animated' => '动态头像',
         'avatar_jpeg' => '个人资料照片 (JPEG/PNG)',
         'avatar_og' => '社交分享图片 (OG Image)',
         'avatar_og_helper' => '推荐尺寸：1200x630px',

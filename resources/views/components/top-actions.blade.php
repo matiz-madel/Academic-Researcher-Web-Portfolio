@@ -6,16 +6,14 @@
            title="{{ __('admin.fields.download_resume') }}"
            class="w-9 h-9 flex items-center justify-center rounded-lg text-xl text-slate-600 dark:text-slate-300 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 hover:text-slate-900 dark:hover:text-white transition-all duration-300"
            aria-label="{{ __('admin.fields.download_resume') }}">
-            {{-- Future SVG implementation: Replace the span below with <svg class="w-5 h-5 text-current">...</svg> --}}
-            <span>📄</span>
+           <x-heroicon-o-document-arrow-down class="w-5 h-5" />
         </a>
     @else
         <button onclick="window.print()"
-                title="{{ __('admin.fields.print') }}"
-                class="w-9 h-9 flex items-center justify-center rounded-lg text-xl text-slate-600 dark:text-slate-300 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 hover:text-slate-900 dark:hover:text-white transition-all duration-300"
-                aria-label="{{ __('admin.fields.print') }}">
-            {{-- Future SVG implementation: Replace the span below with <svg class="w-5 h-5 text-current">...</svg> --}}
-            <span>🖨️</span>
+            title="{{ __('admin.fields.print') }}"
+            class="w-9 h-9 flex items-center justify-center rounded-lg text-xl text-slate-600 dark:text-slate-300 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 hover:text-slate-900 dark:hover:text-white transition-all duration-300"
+            aria-label="{{ __('admin.fields.print') }}">
+            <x-heroicon-o-printer class="w-5 h-5" />
         </button>
     @endif
 </div>
@@ -36,15 +34,11 @@
                aria-label="Change System Language"
                class="relative flex items-center justify-center w-9 h-9 rounded-full text-xl transition-all duration-300
                       {{ $isActiveLocale ? 'bg-white dark:bg-slate-800 shadow-sm ring-1 ring-slate-200 dark:ring-slate-700' : 'opacity-40 hover:opacity-100 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 grayscale-25 hover:grayscale-0' }}">
-
-                {{--
-                    Container for the flag.
-                    Currently rendering the emoji from $language->flag.
-                    Future SVG implementation: Replace the span with an <img> or <svg>
-                    using w-5 h-5 to maintain the internal proportion.
-                --}}
                 <span class="flex items-center justify-center">
-                    {{ $language->flag }}
+                    <img src="{{ asset('svg/flags/' . $language->flag) }}"
+                         alt="{{ $language->language_name }}"
+                         class="h-4 w-auto rounded-sm shadow-sm"
+                         loading="lazy">
                 </span>
             </a>
         @endforeach

@@ -15,11 +15,11 @@ class ExternalLinkForm
             ->components([
                 TextInput::make('label')
                     ->label(__('admin.fields.label'))
-                    ->required(),
+                    ->required(fn ($livewire) => !property_exists($livewire, 'activeLocale') || $livewire->activeLocale === \App\Models\Language::getDefaultLocale()),
                 TextInput::make('url')
                     ->label(__('admin.fields.url'))
                     ->url()
-                    ->required(),
+                    ->required(fn ($livewire) => !property_exists($livewire, 'activeLocale') || $livewire->activeLocale === \App\Models\Language::getDefaultLocale()),
                 ColorPicker::make('color')
                     ->label(__('admin.fields.color'))
                     ->default('#f1f5f9')
